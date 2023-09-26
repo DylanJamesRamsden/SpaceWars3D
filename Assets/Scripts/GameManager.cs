@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     //Delegates
     // StateChanged and OnStateChanged focuses on when the game state changes, broadcasting out the new state
+    // Also, the reason it is an Event, rather than a delegate is because I only every want OnStateChanged to be invoked inside the GameManager
     public delegate void StateChanged(GameState NewState);
     public event StateChanged OnStateChanged;
 
