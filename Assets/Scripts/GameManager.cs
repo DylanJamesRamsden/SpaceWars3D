@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
         if (NewState == CurrentState)
             return;
 
-        OnStateChanged.Invoke(NewState);
+        // NB! If nothing is regestired to listen to OnStateChanged, it will throw a null error
+        CurrentState = NewState;
+        OnStateChanged.Invoke(CurrentState);
+
+        Debug.Log("New game state: " + NewState.ToString());
     }
 }

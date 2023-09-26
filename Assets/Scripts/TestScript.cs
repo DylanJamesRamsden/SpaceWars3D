@@ -8,13 +8,6 @@ public class TestScript : MonoBehaviour
     void Start()
     {
         GameManager.Instance.OnStateChanged += OnStateChanged;
-        Debug.Log(name + " registered to StateChanged");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnStateChanged(GameState NewState)

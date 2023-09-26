@@ -5,8 +5,6 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
 
-    public GameObject ProjectilePrefab;
-
     // Start is called before the first frame update
     void Start()
     {
