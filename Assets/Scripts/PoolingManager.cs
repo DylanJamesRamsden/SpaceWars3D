@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PoolingManager : MonoBehaviour
 {
-    static PoolingManager Instance = null;
+    public static PoolingManager Instance = null;
 
     [Header("Projectiles:")]
     public int ProjectilePoolSize;
     public GameObject ProjectilePrefab;
-    List<GameObject> ProjectilePool;
+    Queue<GameObject> ProjectilePool;
 
     // Start is called before the first frame update
     void Start()
@@ -36,18 +37,32 @@ public class PoolingManager : MonoBehaviour
             return;
         }
 
-        ProjectilePool = new List<GameObject>();
+        ProjectilePool = new Queue<GameObject>();
         for (int i = 0; i < ProjectilePoolSize; i++)
         {
             GameObject NewProjectile = Instantiate(ProjectilePrefab);
             NewProjectile.SetActive(false);
-            ProjectilePool.Add(NewProjectile);
+            ProjectilePool.Enqueue(NewProjectile);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject GetPooledProjectile()
     {
-        
+        if (ProjectilePool.Count <= 0)
+        {
+            Debug.LogWarning("Projectile pool may be to small. No more projectiles to get.");
+            return null;
+        }
+
+        // Pops a projectile from the pool and sets it to Active
+        GameObject PooledProjectile = ProjectilePool.Dequeue();
+        PooledProjectile.SetActive(true);
+        return PooledProjectile;
+    }
+
+    public void AddPooledProjectile(GameObject ProjectileToAdd)
+    {
+        ProjectileToAdd.SetActive(false);
+        ProjectilePool.Enqueue(ProjectileToAdd);
     }
 }
