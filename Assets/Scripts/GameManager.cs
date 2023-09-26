@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public event StateChanged OnStateChanged;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // Ensures that one Game Manager can only ever exist at a given time
         // Also, the Game Manager persists through every level
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(Instance);
 
-            Debug.Log("MyGameManager registered");
+            Debug.Log("Game Manager registered");
         }
         else
         {

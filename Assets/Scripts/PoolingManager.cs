@@ -13,11 +13,12 @@ public class PoolingManager : MonoBehaviour
     Queue<GameObject> ProjectilePool;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (!Instance)
         {
             Instance = this;
+            Debug.Log("Pooling Manager registered");
         }
         else 
         {
