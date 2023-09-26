@@ -51,7 +51,7 @@ public class PoolingManager : MonoBehaviour
     {
         if (ProjectilePool.Count <= 0)
         {
-            Debug.LogWarning("Projectile pool may be to small. No more projectiles to get.");
+            Debug.LogWarning("Projectile pool may be to small. No more projectiles to get, Queue is empty!");
             return null;
         }
 
