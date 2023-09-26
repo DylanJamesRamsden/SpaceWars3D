@@ -15,7 +15,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager MyGameManager = null;
+    public static GameManager Instance = null;
     
     private GameState CurrentState = GameState.Ready;
 
@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
     {
         // Ensures that one Game Manager can only ever exist at a given time
         // Also, the Game Manager persists through every level
-        if (!MyGameManager)
+        if (!Instance)
         {
-            MyGameManager = this;
-            DontDestroyOnLoad(MyGameManager);
+            Instance = this;
+            DontDestroyOnLoad(Instance);
 
             Debug.Log("MyGameManager registered");
         }
