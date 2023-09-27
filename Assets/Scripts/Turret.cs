@@ -5,6 +5,9 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
 
+    // The rate in seconds in which this turret fires
+    public float FireRate = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,9 +16,26 @@ public class Turret : MonoBehaviour
 
     IEnumerator Fire()
     {
-        Debug.Log("Fire");
+        yield return new WaitForSeconds(FireRate);
 
-        yield return new WaitForSeconds(1.0f);
+        // Grabs a projectile from the PoolingManager, if one is not available, one is created
+        GameObject MyProjectileGameobject = PoolingManager.Instance.GetPooledProjectile();
+        if (!MyProjectileGameobject)
+        {
+            MyProjectileGameobject = Instantiate(PoolingManager.Instance.ProjectilePrefab);
+        }
+
+        // Gets the Projectile component off of the Projectile Gameobject, if it does not exist we throw an error
+        Projectile MyProjectile = MyProjectileGameobject.GetComponent<Projectile>();
+        if (!MyProjectile)
+        {
+            Debug.LogError(name + ": MyProjectileGameObject does not hold a Projectile component! Please add one.");
+        }
+        else 
+        {
+            MyProjectile.WakeProjectile(transform.position, transform.localRotation);
+        }
+
         StartCoroutine(Fire());
     }
 }
