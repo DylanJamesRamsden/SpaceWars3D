@@ -7,12 +7,18 @@ public class Projectile : MonoBehaviour
 
     Vector3 OriginLocation;
 
-    public void WakeProjectile(Vector3 Origin, Quaternion Rotation)
+    public float ProjectileSpeed = .1f;
+
+    public GameObject Owner;
+
+    public void WakeProjectile(Vector3 Origin, Quaternion Rotation, GameObject Instigator)
     {
         OriginLocation = Origin;
 
         transform.position = Origin;
         transform.rotation = Rotation;
+
+        Owner = Instigator;
 
         StartCoroutine(Move());
     }
@@ -23,7 +29,7 @@ public class Projectile : MonoBehaviour
     {
         while (Vector3.Distance(transform.position, OriginLocation) < 30.0f)  
         {
-            transform.position = transform.position + (transform.forward * .1f);
+            transform.position = transform.position + (transform.forward * ProjectileSpeed);
             yield return new WaitForFixedUpdate();
         }
 

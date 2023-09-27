@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     // The plane at which our movement ray collides with
     Plane MovementPlane = new Plane(Vector3.up, 0);
 
-    bool bIsTouchDown = false;
     GameState CurrentGameState = GameState.Ready;
 
     // Start is called before the first frame update
