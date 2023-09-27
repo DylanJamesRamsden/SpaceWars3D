@@ -34,6 +34,5 @@ public class Projectile : MonoBehaviour
         }
 
         PoolingManager.Instance.AddPooledProjectile(this.gameObject);
-        Debug.Log("Added to pool");
     }
 }

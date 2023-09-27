@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
 
     void OnHealthDepleted()
     {
-
+        gameObject.SetActive(false);
     }
 
     void OnStateChanged(GameState NewState)
@@ -47,7 +47,7 @@ public class EnemyController : MonoBehaviour
 
     protected virtual IEnumerator Move()
     {
-        while (CurrentGameState == GameState.Running)
+        while (CurrentGameState == GameState.Running && isActiveAndEnabled)
         {
             transform.position += transform.forward * ForwardMovementSpeed;
 
