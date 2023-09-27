@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         CurrentGameState = NewState;
 
-        if (NewState == GameState.Running)
+        if (CurrentGameState == GameState.Running)
         {
             StartCoroutine(InputDetection());
         }

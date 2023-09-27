@@ -20,7 +20,7 @@ public class Turret : MonoBehaviour
     {
         CurrentGameState = NewState;
 
-        if (NewState == GameState.Running)
+        if (CurrentGameState == GameState.Running)
         {
             StartCoroutine(Fire());
         }

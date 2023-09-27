@@ -110,4 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c6179f26d5134448b6bb734b50fd87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireRate: 0.45
+  FireRate: 0.3
