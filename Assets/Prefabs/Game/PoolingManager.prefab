@@ -45,4 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectilePoolSize: 50
-  ProjectilePrefab: {fileID: 0}
+  ProjectilePrefab: {fileID: 1047295062977096851, guid: d45ebae85b162b849bc57e1b58166aba, type: 3}
+  EnemyPoolSize: 20
+  EnemyPrefab: {fileID: 4874626766681133095, guid: 9ade13ff496f3fe46beb3c8377e37cf0, type: 3}

@@ -12,6 +12,11 @@ public class PoolingManager : MonoBehaviour
     public GameObject ProjectilePrefab;
     Queue<GameObject> ProjectilePool;
 
+    [Header("Projectiles:")]
+    public int EnemyPoolSize;
+    public GameObject EnemyPrefab;
+    Queue<GameObject> EnemyPool;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,6 +31,12 @@ public class PoolingManager : MonoBehaviour
             return;
         }
 
+        InitializeProjectilePool();
+        InitializeEnemyPool();
+    }
+
+    void InitializeProjectilePool()
+    {
         if (!ProjectilePrefab)
         {
             Debug.LogError("Projectile Prefab is null!");
@@ -34,7 +45,7 @@ public class PoolingManager : MonoBehaviour
 
         if (ProjectilePoolSize <= 0)
         {
-            Debug.LogError("Projectile pool size must be greator than 0");
+            Debug.LogError("Projectile pool size must be greater than 0");
             return;
         }
 
@@ -45,6 +56,33 @@ public class PoolingManager : MonoBehaviour
             NewProjectile.SetActive(false);
             ProjectilePool.Enqueue(NewProjectile);
         }
+
+        Debug.Log("Projectile pool created, size: " + ProjectilePoolSize.ToString());
+    }
+
+    void InitializeEnemyPool()
+    {
+        if (!EnemyPrefab)
+        {
+            Debug.LogError("Enemy Prefab is null!");
+            return;
+        }
+
+        if (EnemyPoolSize <= 0)
+        {
+            Debug.LogError("Enemy pool size must be greater than 0");
+            return;
+        }
+
+        EnemyPool = new Queue<GameObject>();
+        for (int i = 0; i < EnemyPoolSize; i++)
+        {
+            GameObject NewEnemy = Instantiate(EnemyPrefab);
+            NewEnemy.SetActive(false);
+            ProjectilePool.Enqueue(NewEnemy);
+        }
+
+        Debug.Log("Enemy pool created, size: " + EnemyPoolSize.ToString());
     }
 
     public GameObject GetPooledProjectile()
