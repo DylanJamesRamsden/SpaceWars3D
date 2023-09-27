@@ -8,15 +8,31 @@ public class Turret : MonoBehaviour
     // The rate in seconds in which this turret fires
     public float FireRate = 1.0f;
 
+    GameState CurrentGameState = GameState.Ready;
+
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Fire());
+        GameManager.Instance.OnStateChanged += OnStateChanged;
+    }
+
+    void OnStateChanged(GameState NewState)
+    {
+        CurrentGameState = NewState;
+
+        if (NewState == GameState.Running)
+        {
+            StartCoroutine(Fire());
+        }
     }
 
     IEnumerator Fire()
     {
         yield return new WaitForSeconds(FireRate);
+
+        // If the game state changes and is not Ready, just return this coroutine as we don't want to fire unless we are Running
+        if (CurrentGameState != GameState.Running)
+            yield return null;
 
         // Grabs a projectile from the PoolingManager, if one is not available, one is created
         GameObject MyProjectileGameobject = PoolingManager.Instance.GetPooledProjectile();
