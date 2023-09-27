@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
     // Once a certain distance is reached, it is added back in the projectile pool
     IEnumerator Move()
     {
-        while (Vector3.Distance(transform.position, OriginLocation) < 30.0f)  
+        while (Vector3.Distance(transform.position, OriginLocation) < 30.0f && isActiveAndEnabled)  
         {
             transform.position = transform.position + (transform.forward * ProjectileSpeed);
             yield return new WaitForFixedUpdate();

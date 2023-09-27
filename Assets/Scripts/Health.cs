@@ -18,12 +18,19 @@ public class Health : MonoBehaviour
     {
         if (other.tag == "Projectile")
         {
+            Projectile HittingProjectile = other.GetComponent<Projectile>();
+            if (!HittingProjectile)
+            {
+                Debug.LogError("Hitting Projectile Gameobject does not have a Projectile component attached.");
+                return;
+            }
+
             // If the owner of the projectile is the same as the gameobject of this Health component, we return
-            if (other.GetComponent<Projectile>().Owner == this.gameObject)
+            if (HittingProjectile.Owner == this.gameObject)
                 return;
 
+            // Handle health
             HealthPoints--;
-
             if (HealthPoints > 0)
             {
                 OnHealthChanged.Invoke(HealthPoints);
@@ -32,6 +39,9 @@ public class Health : MonoBehaviour
             {
                 OnHealthDepleted.Invoke();
             }
+
+            // The hitting projectile is added back into the projectile pool
+            PoolingManager.Instance.AddPooledProjectile(other.gameObject);
         }
     }
 }
