@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour
         if (CurrentGameState == GameState.Running)
         {
             StartCoroutine(InputDetection());
+
+            Turret[] Turrets = GetComponentsInChildren<Turret>();
+            foreach (Turret T in Turrets)
+            {
+                T.WakeTurret();
+            }
         }
     }
 

@@ -19,11 +19,11 @@ public class Turret : MonoBehaviour
     void OnStateChanged(GameState NewState)
     {
         CurrentGameState = NewState;
+    }
 
-        if (CurrentGameState == GameState.Running)
-        {
-            StartCoroutine(Fire());
-        }
+    public void WakeTurret()
+    {
+        StartCoroutine(Fire());
     }
 
     IEnumerator Fire()
@@ -49,7 +49,8 @@ public class Turret : MonoBehaviour
         }
         else 
         {
-            MyProjectile.WakeProjectile(transform.position, transform.localRotation, this.gameObject);
+            MyProjectile.WakeProjectile(transform.position, transform.rotation, this.transform.parent.gameObject);
+            Debug.Log("Fired");
         }
 
         StartCoroutine(Fire());

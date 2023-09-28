@@ -46,6 +46,12 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Rotation;
 
         StartCoroutine(Move());
+
+        Turret[] Turrets = GetComponentsInChildren<Turret>();
+        foreach (Turret T in Turrets)
+        {
+            T.WakeTurret();
+        }
     }
 
     void OnHealthChanged(int NewHealth)

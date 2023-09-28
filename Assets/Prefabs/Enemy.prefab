@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForwardMovementSpeed: 0.1
+  AvailableSpawnZone: 0
 --- !u!114 &7936231761170391522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +181,10 @@ PrefabInstance:
     - target: {fileID: 3015971244451133047, guid: c008adc33f0813445aba64b2e63e147f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430275231986194474, guid: c008adc33f0813445aba64b2e63e147f, type: 3}
+      propertyPath: FireRate
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c008adc33f0813445aba64b2e63e147f, type: 3}
