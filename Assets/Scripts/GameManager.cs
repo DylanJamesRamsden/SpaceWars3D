@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     // Also, the reason it is an Event, rather than a delegate is because I only every want OnStateChanged to be invoked inside the GameManager
     GameState CurrentGameState = GameState.Ready;
     public delegate void StateChanged(GameState NewState);
-    public event StateChanged OnStateChanged;
+    public static event StateChanged OnStateChanged;
 
     int CurrentLevel = 1;
     public delegate void LevelChanged(int NewLevel);
@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             ChangeState(GameState.Running);
+
+            PlayerController.OnPlayerDeath += OnPlayerDeath;
         }
 
         if (Input.GetKeyDown(KeyCode.L))
@@ -82,5 +84,10 @@ public class GameManager : MonoBehaviour
         OnLevelChanged.Invoke(CurrentLevel);
 
         Debug.Log("Level changed, new level: " + CurrentLevel.ToString());
+    }
+
+    void OnPlayerDeath()
+    {
+        ChangeState(GameState.Complete);
     }
 }

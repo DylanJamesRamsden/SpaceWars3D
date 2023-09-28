@@ -13,7 +13,7 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.OnStateChanged += OnStateChanged;
+        GameManager.OnStateChanged += OnStateChanged;
     }
 
     void OnStateChanged(GameState NewState)

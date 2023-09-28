@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
         MyHealth.OnHealthChanged += OnHealthChanged;
         MyHealth.OnHealthDepleted += OnHealthDepleted;
 
-        GameManager.Instance.OnStateChanged += OnStateChanged;
+        GameManager.OnStateChanged += OnStateChanged;
     }
 
     public void WakeEnemy(Vector3 Origin, Quaternion Rotation)

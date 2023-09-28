@@ -10,10 +10,36 @@ public class PlayerController : MonoBehaviour
 
     GameState CurrentGameState = GameState.Ready;
 
+    // Delegates
+    public delegate void PlayerDeath();
+    public static event PlayerDeath OnPlayerDeath;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.OnStateChanged += OnStateChanged;
+        Health MyHealth = GetComponent<Health>();
+        if (!MyHealth)
+        {
+            Debug.LogError("Add health component to Enemy prefab!");
+            return;
+        }
+
+        MyHealth.OnHealthChanged += OnHealthChanged;
+        MyHealth.OnHealthDepleted += OnHealthDepleted;
+
+        GameManager.OnStateChanged += OnStateChanged;
+    }
+
+    void OnHealthChanged(int NewHealth)
+    {
+
+    }
+
+    void OnHealthDepleted()
+    {
+        transform.position = Vector3.zero;
+
+        OnPlayerDeath.Invoke();
     }
 
     void OnStateChanged(GameState NewState)
