@@ -74,12 +74,11 @@ public class EnemySpawner : MonoBehaviour
                 case SpawnZone.Top:
                     SpawnLocation = GetRandomLocationInSpawnZone(TopSpawnZone);
                     SpawnRotation = TopSpawnZone.gameObject.transform.localRotation;
-                    Debug.Log(SpawnRotation);
                     break;
                 case SpawnZone.Side:
                     BoxCollider SideSpawnZone = SideSpawnZones[Random.Range(0, 1)];
                     SpawnLocation = GetRandomLocationInSpawnZone(SideSpawnZone);
-                    SpawnRotation = SideSpawnZone.gameObject.transform.rotation;
+                    SpawnRotation = SideSpawnZone.gameObject.transform.localRotation;
                     break;
             }
 
@@ -89,8 +88,9 @@ public class EnemySpawner : MonoBehaviour
 
     Vector3 GetRandomLocationInSpawnZone(BoxCollider SpawnZone)
     {
+        // @TODO this isn't working based on rotation, look into
         float Width = SpawnZone.size.x / 2;
 
-        return new Vector3(Random.Range(SpawnZone.transform.position.x - Width, SpawnZone.transform.position.x + Width), SpawnZone.transform.position.y, SpawnZone.transform.position.z);
+        return new Vector3(Random.Range(SpawnZone.transform.localPosition.x - Width, SpawnZone.transform.localPosition.x + Width), SpawnZone.transform.localPosition.y, SpawnZone.transform.localPosition.z);
     }
 }

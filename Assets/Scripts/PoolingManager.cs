@@ -109,7 +109,7 @@ public class PoolingManager : MonoBehaviour
     {
         if (EnemyPool.Count <= 0)
         {
-            Debug.LogWarning("Enemy pool may be to small. No more projectiles to get, Queue is empty!");
+            Debug.LogWarning("Enemy pool may be to small. No more enemies to get, Queue is empty!");
             return null;
         }
 
