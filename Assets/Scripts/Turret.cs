@@ -50,7 +50,6 @@ public class Turret : MonoBehaviour
         else 
         {
             MyProjectile.WakeProjectile(transform.position, transform.rotation, this.transform.parent.gameObject);
-            Debug.Log("Fired");
         }
 
         StartCoroutine(Fire());
