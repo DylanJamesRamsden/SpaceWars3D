@@ -49,13 +49,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ChangeState(GameState.Running);
-
-            PlayerController.OnPlayerDeath += OnPlayerDeath;
-        }
-
         if (Input.GetKeyDown(KeyCode.L))
         {
             NextLevel();
@@ -89,5 +82,14 @@ public class GameManager : MonoBehaviour
     void OnPlayerDeath()
     {
         ChangeState(GameState.Complete);
+
+        //PlayerController.OnPlayerDeath -= OnPlayerDeath;
+    }
+
+    public void StartGame()
+    {
+        PlayerController.OnPlayerDeath += OnPlayerDeath;
+
+        ChangeState(GameState.Running);
     }
 }

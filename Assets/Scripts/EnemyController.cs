@@ -68,9 +68,15 @@ public class EnemyController : MonoBehaviour
     {
         CurrentGameState = NewState;
 
-        if (CurrentGameState == GameState.Running)
+        switch(NewState)
         {
-            StartCoroutine(Move());
+            case GameState.Running:
+                StartCoroutine(Move());
+                break;
+            case GameState.Complete:
+                StopAllCoroutines();
+                PoolingManager.Instance.AddPooledEnemy(this.gameObject);
+                break;
         }
     }
 

@@ -29,6 +29,16 @@ public class EnemySpawner : MonoBehaviour
         {
             StartCoroutine(SpawnWave());
         }
+
+        switch(NewState)
+        {
+            case GameState.Running:
+                StartCoroutine(SpawnWave());
+                break;
+            case GameState.Complete:
+                StopAllCoroutines();
+                break;
+        }
     }
 
     void OnLevelChanged(int NewLevel)
@@ -40,9 +50,6 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnWave()
     {
         yield return new WaitForSeconds(IntervalBetweenWaveSpawn);
-        
-        if (CurrentGameState != GameState.Running)
-            yield return null;
 
         for (int i = 0; i < WaveSize; i++)
         {
