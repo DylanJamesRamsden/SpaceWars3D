@@ -1,6 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum SpawnZone
+{
+    Top,
+    Side,
+    All
+}
 
 public class EnemyController : MonoBehaviour
 {
@@ -8,6 +16,11 @@ public class EnemyController : MonoBehaviour
     GameState CurrentGameState = GameState.Ready;
 
     public float ForwardMovementSpeed = .1f;
+
+    Vector3 OriginLocation;
+
+    [Header("Spawning:")]
+    public SpawnZone AvailableSpawnZone;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +36,16 @@ public class EnemyController : MonoBehaviour
         MyHealth.OnHealthDepleted += OnHealthDepleted;
 
         GameManager.Instance.OnStateChanged += OnStateChanged;
+    }
+
+    public void WakeEnemy(Vector3 Origin, Quaternion Rotation)
+    {
+        OriginLocation = Origin;
+
+        transform.position = Origin;
+        transform.rotation = Rotation;
+
+        StartCoroutine(Move());
     }
 
     void OnHealthChanged(int NewHealth)
@@ -47,11 +70,13 @@ public class EnemyController : MonoBehaviour
 
     protected virtual IEnumerator Move()
     {
-        while (CurrentGameState == GameState.Running && isActiveAndEnabled)
+        while (Vector3.Distance(transform.position, OriginLocation) < 40.0f && isActiveAndEnabled)
         {
             transform.position += transform.forward * ForwardMovementSpeed;
 
             yield return new WaitForFixedUpdate();
         }
+
+        PoolingManager.Instance.AddPooledEnemy(this.gameObject);
     }
 }

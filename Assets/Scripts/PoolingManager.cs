@@ -79,7 +79,7 @@ public class PoolingManager : MonoBehaviour
         {
             GameObject NewEnemy = Instantiate(EnemyPrefab);
             NewEnemy.SetActive(false);
-            ProjectilePool.Enqueue(NewEnemy);
+            EnemyPool.Enqueue(NewEnemy);
         }
 
         Debug.Log("Enemy pool created, size: " + EnemyPoolSize.ToString());
@@ -103,5 +103,25 @@ public class PoolingManager : MonoBehaviour
     {
         ProjectileToAdd.SetActive(false);
         ProjectilePool.Enqueue(ProjectileToAdd);
+    }
+
+    public GameObject GetPooledEnemy()
+    {
+        if (EnemyPool.Count <= 0)
+        {
+            Debug.LogWarning("Enemy pool may be to small. No more projectiles to get, Queue is empty!");
+            return null;
+        }
+
+        // Pops a projectile from the pool and sets it to Active
+        GameObject PooledEnemy = EnemyPool.Dequeue();
+        PooledEnemy.SetActive(true);
+        return PooledEnemy;
+    }
+
+    public void AddPooledEnemy(GameObject EnemyToAdd)
+    {
+        EnemyToAdd.SetActive(false);
+        EnemyPool.Enqueue(EnemyToAdd);
     }
 }

@@ -16,14 +16,17 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance = null;
-    
-    private GameState CurrentState = GameState.Ready;
 
-    //Delegates
+    // Delegates
     // StateChanged and OnStateChanged focuses on when the game state changes, broadcasting out the new state
     // Also, the reason it is an Event, rather than a delegate is because I only every want OnStateChanged to be invoked inside the GameManager
+    GameState CurrentGameState = GameState.Ready;
     public delegate void StateChanged(GameState NewState);
     public event StateChanged OnStateChanged;
+
+    int CurrentLevel = 1;
+    public delegate void LevelChanged(int NewLevel);
+    public event LevelChanged OnLevelChanged;
 
     // Start is called before the first frame update
     void Awake()
@@ -50,18 +53,34 @@ public class GameManager : MonoBehaviour
         {
             ChangeState(GameState.Running);
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            NextLevel();
+        }
     }
 
     // Changes the current game state to a new state 
     void ChangeState(GameState NewState)
     {
-        if (NewState == CurrentState)
+        if (NewState == CurrentGameState)
             return;
 
-        // NB! If nothing is regestired to listen to OnStateChanged, it will throw a null error
-        CurrentState = NewState;
-        OnStateChanged.Invoke(CurrentState);
+        // NB! If nothing is registered to listen to OnStateChanged, it will throw a null error
+        CurrentGameState = NewState;
+        OnStateChanged.Invoke(CurrentGameState);
 
         Debug.Log("New game state: " + NewState.ToString());
+    }
+
+    void NextLevel()
+    {
+        if (CurrentGameState != GameState.Running)
+            return;
+
+        CurrentLevel++;
+        OnLevelChanged.Invoke(CurrentLevel);
+
+        Debug.Log("Level changed, new level: " + CurrentLevel.ToString());
     }
 }
