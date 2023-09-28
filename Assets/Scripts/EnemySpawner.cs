@@ -25,11 +25,6 @@ public class EnemySpawner : MonoBehaviour
     {
         CurrentGameState = NewState;
 
-        if (CurrentGameState == GameState.Running)
-        {
-            StartCoroutine(SpawnWave());
-        }
-
         switch(NewState)
         {
             case GameState.Running:

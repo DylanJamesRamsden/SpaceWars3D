@@ -70,9 +70,6 @@ public class EnemyController : MonoBehaviour
 
         switch(NewState)
         {
-            case GameState.Running:
-                StartCoroutine(Move());
-                break;
             case GameState.Complete:
                 StopAllCoroutines();
                 PoolingManager.Instance.AddPooledEnemy(this.gameObject);

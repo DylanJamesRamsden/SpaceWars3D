@@ -11,6 +11,22 @@ public class Projectile : MonoBehaviour
 
     public GameObject Owner;
 
+    void Start()
+    {
+        GameManager.OnStateChanged += OnStateChanged;
+    }
+
+    void OnStateChanged(GameState NewState)
+    {
+        switch(NewState)
+        {
+            case GameState.Complete:
+                StopAllCoroutines();
+                PoolingManager.Instance.AddPooledProjectile(this.gameObject);
+                break;
+        }
+    }
+
     public void WakeProjectile(Vector3 Origin, Quaternion Rotation, GameObject Instigator)
     {
         OriginLocation = Origin;

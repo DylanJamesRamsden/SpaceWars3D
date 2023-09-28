@@ -19,6 +19,13 @@ public class Turret : MonoBehaviour
     void OnStateChanged(GameState NewState)
     {
         CurrentGameState = NewState;
+
+        switch(NewState)
+        {
+            case GameState.Complete:
+                StopAllCoroutines();
+                break;
+        }
     }
 
     public void WakeTurret()
