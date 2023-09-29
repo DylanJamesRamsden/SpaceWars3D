@@ -54,6 +54,16 @@ public class EnemyController : MonoBehaviour
         {
             T.WakeTurret();
         }
+
+        Health MyHealth = GetComponent<Health>();
+        if (!MyHealth)
+        {
+            Debug.LogError("Add health component to Enemy prefab!");
+        }
+        else
+        {
+            MyHealth.InitializeHealth();
+        }
     }
 
     void OnHealthChanged(int NewHealth)

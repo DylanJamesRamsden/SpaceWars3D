@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
@@ -66,6 +63,16 @@ public class PlayerController : MonoBehaviour
             foreach (Turret T in Turrets)
             {
                 T.WakeTurret();
+            }
+
+            Health MyHealth = GetComponent<Health>();
+            if (!MyHealth)
+            {
+                Debug.LogError("Add health component to Enemy prefab!");
+            }
+            else
+            {
+                MyHealth.InitializeHealth();
             }
         }
     }

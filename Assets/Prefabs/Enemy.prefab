@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452c87c739cb47a4a817c29ec54d09ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 3
 --- !u!65 &650265033734893206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -213,6 +214,10 @@ PrefabInstance:
     - target: {fileID: 3015971244451133047, guid: c008adc33f0813445aba64b2e63e147f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430275231986194474, guid: c008adc33f0813445aba64b2e63e147f, type: 3}
+      propertyPath: FireRate
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c008adc33f0813445aba64b2e63e147f, type: 3}
