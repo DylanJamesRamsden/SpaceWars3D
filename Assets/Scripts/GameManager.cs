@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance = null;
 
     // Delegates
-    // StateChanged and OnStateChanged focuses on when the game state changes, broadcasting out the new state
-    // Also, the reason it is an Event, rather than a delegate is because I only every want OnStateChanged to be invoked inside the GameManager
     GameState CurrentGameState = GameState.Ready;
     public delegate void StateChanged(GameState NewState);
     public static event StateChanged OnStateChanged;
@@ -46,15 +44,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            NextLevel();
-        }
-    }
-
     // Changes the current game state to a new state 
     void ChangeState(GameState NewState)
     {
@@ -68,6 +57,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("New game state: " + NewState.ToString());
     }
 
+    // Increments the level
     void NextLevel()
     {
         if (CurrentGameState != GameState.Running)
@@ -83,9 +73,10 @@ public class GameManager : MonoBehaviour
     {
         ChangeState(GameState.Complete);
 
-        //PlayerController.OnPlayerDeath -= OnPlayerDeath;
+        PlayerController.OnPlayerDeath -= OnPlayerDeath;
     }
 
+    // Starts the game
     public void StartGame()
     {
         PlayerController.OnPlayerDeath += OnPlayerDeath;
@@ -93,11 +84,13 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.Running);
     }
 
+    // Readys the game
     public void ReadyGame()
     {
         ChangeState(GameState.Ready);
     }
 
+    // Pauses the game
     public void PauseGame()
     {
         ChangeState(GameState.Paused);
@@ -105,6 +98,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
     }
 
+    // Unpauses the game
     public void UnpauseGame()
     {
         Time.timeScale = 1.0f;
