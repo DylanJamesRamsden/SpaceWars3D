@@ -92,4 +92,23 @@ public class GameManager : MonoBehaviour
 
         ChangeState(GameState.Running);
     }
+
+    public void ReadyGame()
+    {
+        ChangeState(GameState.Ready);
+    }
+
+    public void PauseGame()
+    {
+        ChangeState(GameState.Paused);
+
+        Time.timeScale = 0.0f;
+    }
+
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1.0f;
+
+        ChangeState(GameState.Running);
+    }
 }

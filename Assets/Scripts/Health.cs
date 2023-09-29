@@ -12,7 +12,24 @@ public class Health : MonoBehaviour
     public delegate void HealthDepleted();
     public event HealthDepleted OnHealthDepleted;
 
-    public int HealthPoints = 3;
+    public const int MaxHealth = 3;
+
+    int CurrentHealth;
+
+    void Start()
+    {
+        GameManager.OnStateChanged += OnStateChanged;
+    }
+
+    void OnStateChanged(GameState NewState)
+    {
+        switch(NewState)
+        {
+            case GameState.Running:
+                CurrentHealth = MaxHealth;
+                break;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,10 +44,10 @@ public class Health : MonoBehaviour
                 return;
 
             // Handle health
-            HealthPoints--;
-            if (HealthPoints > 0)
+            CurrentHealth--;
+            if (CurrentHealth > 0)
             {
-                OnHealthChanged.Invoke(HealthPoints);
+                OnHealthChanged.Invoke(CurrentHealth);
             }
             else
             {

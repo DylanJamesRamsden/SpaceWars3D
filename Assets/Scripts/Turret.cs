@@ -30,6 +30,9 @@ public class Turret : MonoBehaviour
 
     public void WakeTurret()
     {
+        // All coroutines are flushed before we start a new one
+        StopAllCoroutines();
+
         StartCoroutine(Fire());
     }
 
