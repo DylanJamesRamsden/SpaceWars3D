@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -70,21 +71,22 @@ public class EnemySpawner : MonoBehaviour
         else 
         {
             Vector3 SpawnLocation = Vector3.zero;
-            Quaternion SpawnRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            Vector3 LookAtLocation = Vector3.zero;
             switch (MyEnemy.AvailableSpawnZone)
             {
                 case SpawnZone.Top:
                     SpawnLocation = GetRandomLocationInSpawnZone(TopSpawnZone);
-                    SpawnRotation = TopSpawnZone.gameObject.transform.localRotation;
+                    LookAtLocation = new Vector3(SpawnLocation.x, TopSpawnZone.transform.forward.y * 10, SpawnLocation.z);
+                    Debug.DrawLine(SpawnLocation, LookAtLocation, Color.red, 10.0f);
                     break;
                 case SpawnZone.Side:
                     BoxCollider SideSpawnZone = SideSpawnZones[Random.Range(0, 1)];
                     SpawnLocation = GetRandomLocationInSpawnZone(SideSpawnZone);
-                    SpawnRotation = SideSpawnZone.gameObject.transform.localRotation;
+                    //SpawnRotation = SideSpawnZone.gameObject.transform.localRotation;
                     break;
             }
 
-            MyEnemy.WakeEnemy(SpawnLocation, SpawnRotation);
+            MyEnemy.WakeEnemy(SpawnLocation, LookAtLocation);
         }
     }
 
@@ -93,6 +95,6 @@ public class EnemySpawner : MonoBehaviour
         // @TODO this isn't working based on rotation, look into
         float Width = SpawnZone.size.x / 2;
 
-        return new Vector3(Random.Range(SpawnZone.transform.localPosition.x - Width, SpawnZone.transform.localPosition.x + Width), SpawnZone.transform.localPosition.y, SpawnZone.transform.localPosition.z);
+        return new Vector3(Random.Range(SpawnZone.transform.position.x - Width, SpawnZone.transform.position.x + Width), SpawnZone.transform.position.y, SpawnZone.transform.position.z);
     }
 }

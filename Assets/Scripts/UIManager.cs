@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         GameManager.OnStateChanged += OnStateChanged;
+        PlayerController.OnScoreChanged += OnScoreChanged;
     }
 
     void OnStateChanged(GameState NewState)
@@ -34,8 +35,6 @@ public class UIManager : MonoBehaviour
                 PlayerHUD.SetActive(true);
                 StartMenu.SetActive(false);
                 PauseMenu.SetActive(false);
-
-                PlayerController.OnScoreChanged += OnScoreChanged;
                 break;
             case GameState.Complete:
                 EndGameMenu.SetActive(true);

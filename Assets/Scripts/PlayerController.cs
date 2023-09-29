@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
 
     // The plane at which our movement ray collides with
-    Plane MovementPlane = new Plane(Vector3.up, 0);
+    Plane MovementPlane = new Plane(Vector3.forward, 0);
 
     GameState CurrentGameState = GameState.Ready;
 

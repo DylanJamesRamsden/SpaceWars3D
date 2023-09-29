@@ -40,12 +40,12 @@ public class EnemyController : MonoBehaviour
         GameManager.OnStateChanged += OnStateChanged;
     }
 
-    public void WakeEnemy(Vector3 Origin, Quaternion Rotation)
+    public void WakeEnemy(Vector3 Origin, Vector3 LookAtLocation)
     {
         OriginLocation = Origin;
 
         transform.position = Origin;
-        transform.rotation = Rotation;
+        transform.LookAt(LookAtLocation);
 
         StartCoroutine(Move());
 
