@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8443064106880371561}
   - component: {fileID: 8131152010867548276}
   - component: {fileID: 650265033734893206}
+  - component: {fileID: 1416819947407240444}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -133,7 +134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ForwardMovementSpeed: 0.1
   AvailableSpawnZone: 0
-  ScoreToAdd: 10
 --- !u!114 &8131152010867548276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +160,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1416819947407240444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4874626766681133095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084ac77406169424fa1d5cdf02e2d662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreToGive: 10
 --- !u!1001 &8478597121158333144
 PrefabInstance:
   m_ObjectHideFlags: 0

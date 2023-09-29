@@ -19,8 +19,6 @@ public class EnemyController : MonoBehaviour
     [Header("Spawning:")]
     public SpawnZone AvailableSpawnZone;
 
-    public int ScoreToAdd = 10;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +68,11 @@ public class EnemyController : MonoBehaviour
 
     void OnHealthDepleted()
     {
-        PlayerController.AddScore(ScoreToAdd);
+        Score MyScore = GetComponent<Score>();
+        if (MyScore)
+        {
+            MyScore.GiveScore();
+        }
 
         // Spawns score pickups on death
         for (int i = 0; i < 3; i++)

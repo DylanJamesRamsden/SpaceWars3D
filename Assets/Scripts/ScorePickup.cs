@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class ScorePickup : MonoBehaviour
@@ -38,7 +39,11 @@ public class ScorePickup : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            PlayerController.AddScore(10);
+            Score MyScore = GetComponent<Score>();
+            if (MyScore)
+            {
+                MyScore.GiveScore();
+            }
 
             PoolingManager.Instance.AddPooledScorePickup(this.gameObject);
         }
