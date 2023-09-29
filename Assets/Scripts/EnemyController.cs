@@ -65,6 +65,27 @@ public class EnemyController : MonoBehaviour
     {
         PlayerController.AddScore(ScoreToAdd);
 
+        // Spawns score pickups on death
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject MyScorePickupGameobject = PoolingManager.Instance.GetPooledScorePickup();
+            if (!MyScorePickupGameobject)
+            {
+                int ScorePickupToSpawn = UnityEngine.Random.Range(0, PoolingManager.Instance.ScorePickupPrefabs.Length);
+                MyScorePickupGameobject = Instantiate(PoolingManager.Instance.ScorePickupPrefabs[ScorePickupToSpawn]);
+            }
+
+            ScorePickup MyScorePickup = MyScorePickupGameobject.GetComponent<ScorePickup>();
+            if (!MyScorePickup)
+            {
+                Debug.LogError(name + ": MyScorePickupGameobject does not hold a ScorePickup component! Please add one.");
+            }
+            else 
+            {
+                MyScorePickup.WakeScorePickup(transform.position);
+            }
+        }
+
         StopAllCoroutines();
         PoolingManager.Instance.AddPooledEnemy(this.gameObject);
     }

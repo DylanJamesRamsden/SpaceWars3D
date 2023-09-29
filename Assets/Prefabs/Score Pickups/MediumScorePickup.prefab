@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1794944182692724751}
   - component: {fileID: 1381947254941093007}
   - component: {fileID: 162615777105743823}
-  - component: {fileID: 8312914673570377290}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8312914673570377290
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625824072800680717}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1770111157763287262
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5335796509312345115}
   - component: {fileID: 3912650318158750196}
-  - component: {fileID: 6231910826174079752}
+  - component: {fileID: 8875896295790393657}
+  - component: {fileID: 4332566860436341294}
   m_Layer: 0
   m_Name: MediumScorePickup
   m_TagString: Untagged
@@ -144,7 +130,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f207bb376e5c32841978e21187b30879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &6231910826174079752
+--- !u!54 &8875896295790393657
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770111157763287262}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 8
+  m_CollisionDetection: 0
+--- !u!65 &4332566860436341294
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,8 +154,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770111157763287262}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.01, z: 0.5}
+  m_Size: {x: 0.5, y: 0.1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}

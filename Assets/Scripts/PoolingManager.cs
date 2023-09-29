@@ -153,4 +153,24 @@ public class PoolingManager : MonoBehaviour
         EnemyToAdd.SetActive(false);
         EnemyPool.Enqueue(EnemyToAdd);
     }
+
+    public GameObject GetPooledScorePickup()
+    {
+        if (ScorePickupPool.Count <= 0)
+        {
+            Debug.LogWarning("Score Pickup pool may be to small. No more Score Pickups to get, Queue is empty!");
+            return null;
+        }
+
+        // Pops a projectile from the pool and sets it to Active
+        GameObject PooledScorePickup = ScorePickupPool.Dequeue();
+        PooledScorePickup.SetActive(true);
+        return PooledScorePickup;
+    }
+
+    public void AddPooledScorePickup(GameObject ScorePickupToAdd)
+    {
+        ScorePickupToAdd.SetActive(false);
+        ScorePickupPool.Enqueue(ScorePickupToAdd);
+    }
 }

@@ -4,17 +4,43 @@ using UnityEngine;
 
 public class ScorePickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    Rigidbody MyRigidBody;
+
+    Vector3 OriginLocation;
+
+    public void WakeScorePickup(Vector3 Origin)
     {
-        
+        transform.position = Origin;
+
+        MyRigidBody = GetComponent<Rigidbody>();
+        if (!MyRigidBody)
+        {
+            Debug.LogError(name + " has attached Rigidbody, please add one!");
+        }
+        Vector3 ForceToAdd = new Vector3(Random.Range(-3.0f, 3.0f), Random.Range(1.0f, 5.0f), 0.0f);
+        MyRigidBody.AddForce(ForceToAdd, ForceMode.Impulse);
+
+        StartCoroutine(Move());
     }
 
-    private void OnTriggerEnter(Collider other)
+    IEnumerator Move()
+    {
+        while (Vector3.Distance(transform.position, OriginLocation) < 40.0f && isActiveAndEnabled)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        PoolingManager.Instance.AddPooledScorePickup(this.gameObject);
+    }
+
+      private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            
+            PlayerController.AddScore(10);
+
+            PoolingManager.Instance.AddPooledScorePickup(this.gameObject);
         }
     }
 }
