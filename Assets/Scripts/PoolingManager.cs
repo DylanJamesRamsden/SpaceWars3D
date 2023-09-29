@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,11 @@ public class PoolingManager : MonoBehaviour
     public GameObject EnemyPrefab;
     Queue<GameObject> EnemyPool;
 
+    [Header("Score Pickups:")]
+    public int ScorePickupPoolSize;
+    public GameObject[] ScorePickupPrefabs;
+    Queue<GameObject> ScorePickupPool;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,6 +39,7 @@ public class PoolingManager : MonoBehaviour
 
         InitializeProjectilePool();
         InitializeEnemyPool();
+        InitializeScorePickupPool();
     }
 
     void InitializeProjectilePool()
@@ -83,6 +90,28 @@ public class PoolingManager : MonoBehaviour
         }
 
         Debug.Log("Enemy pool created, size: " + EnemyPoolSize.ToString());
+    }
+
+    void InitializeScorePickupPool()
+    {
+        if (ScorePickupPrefabs.Length <= 0)
+        {
+            Debug.LogError("Please assign Score Pickup prefabs!");
+            return;
+        }
+
+        ScorePickupPool = new Queue<GameObject>();
+        for (int i = 0; i < ScorePickupPrefabs.Length; i++)
+        {
+            for (int x = 0; x < ScorePickupPoolSize/ScorePickupPrefabs.Length; x++)
+            {
+                GameObject NewScorePickup = Instantiate(ScorePickupPrefabs[i]);
+                NewScorePickup.SetActive(false);
+                ScorePickupPool.Enqueue(NewScorePickup);
+            }
+        }
+
+        Debug.Log("Score Pickup pool created, size: " + ScorePickupPool.Count.ToString());
     }
 
     public GameObject GetPooledProjectile()
