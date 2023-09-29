@@ -11,6 +11,11 @@ public class UIManager : MonoBehaviour
     public GameObject PlayerHUD;
     public GameObject PauseMenu;
 
+    public Text ScoreText;
+    public Text EndGameScoreText;
+
+    int CurrentScore;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,15 +34,26 @@ public class UIManager : MonoBehaviour
                 PlayerHUD.SetActive(true);
                 StartMenu.SetActive(false);
                 PauseMenu.SetActive(false);
+
+                PlayerController.OnScoreChanged += OnScoreChanged;
                 break;
             case GameState.Complete:
                 EndGameMenu.SetActive(true);
                 PlayerHUD.SetActive(false);
+
+                EndGameScoreText.text = CurrentScore.ToString();
                 break;
             case GameState.Paused:
                 PauseMenu.SetActive(true);
                 PlayerHUD.SetActive(false);
                 break;
         }
+    }
+
+    void OnScoreChanged(int NewScore)
+    {
+        CurrentScore = NewScore;
+
+        ScoreText.text = CurrentScore.ToString();
     }
 }

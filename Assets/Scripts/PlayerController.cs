@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +15,11 @@ public class PlayerController : MonoBehaviour
     // Delegates
     public delegate void PlayerDeath();
     public static event PlayerDeath OnPlayerDeath;
+
+    public delegate void ScoreChanged(int NewScore);
+    public static event ScoreChanged OnScoreChanged;
+
+    static int Score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +55,11 @@ public class PlayerController : MonoBehaviour
 
         if (CurrentGameState == GameState.Running)
         {
+            // Resets the player score
+            // @TODO look to move this into it's own component
+            Score = 0;
+            OnScoreChanged.Invoke(Score);
+
             StartCoroutine(InputDetection());
 
             Turret[] Turrets = GetComponentsInChildren<Turret>();
@@ -88,5 +100,12 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public static void AddScore(int ScoreToAdd)
+    {
+        Score += ScoreToAdd;
+
+        OnScoreChanged.Invoke(Score);
     }
 }

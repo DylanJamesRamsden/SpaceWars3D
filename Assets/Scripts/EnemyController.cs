@@ -22,6 +22,8 @@ public class EnemyController : MonoBehaviour
     [Header("Spawning:")]
     public SpawnZone AvailableSpawnZone;
 
+    public int ScoreToAdd = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +63,10 @@ public class EnemyController : MonoBehaviour
 
     void OnHealthDepleted()
     {
-        gameObject.SetActive(false);
+        PlayerController.AddScore(ScoreToAdd);
+
+        StopAllCoroutines();
+        PoolingManager.Instance.AddPooledEnemy(this.gameObject);
     }
 
     void OnStateChanged(GameState NewState)
