@@ -7,8 +7,6 @@ public class Health : MonoBehaviour
 {
 
     // Delegates
-    public delegate void HealthChanged(int NewHealth);
-    public event HealthChanged OnHealthChanged;
     public delegate void HealthDepleted();
     public event HealthDepleted OnHealthDepleted;
 
@@ -35,11 +33,7 @@ public class Health : MonoBehaviour
 
             // Handle health
             CurrentHealth--;
-            if (CurrentHealth > 0)
-            {
-                OnHealthChanged.Invoke(CurrentHealth);
-            }
-            else
+            if (CurrentHealth <= 0)
             {
                 OnHealthDepleted.Invoke();
             }

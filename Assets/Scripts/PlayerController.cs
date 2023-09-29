@@ -1,8 +1,12 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    [Header("PowerUps")]
+    public GameObject MyShield;
 
     // The plane at which our movement ray collides with
     Plane MovementPlane = new Plane(Vector3.forward, 0);
@@ -28,15 +32,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        MyHealth.OnHealthChanged += OnHealthChanged;
         MyHealth.OnHealthDepleted += OnHealthDepleted;
 
         GameManager.OnStateChanged += OnStateChanged;
-    }
-
-    void OnHealthChanged(int NewHealth)
-    {
-
     }
 
     void OnHealthDepleted()
@@ -114,5 +112,21 @@ public class PlayerController : MonoBehaviour
         Score += ScoreToAdd;
 
         OnScoreChanged.Invoke(Score);
+    }
+
+    public void ActivateShield()
+    {
+        if (!MyShield)
+        {
+            Debug.LogError("No Shield GameObject on Player!");
+            return;
+        }
+
+        MyShield.SetActive(true);
+        Shield MyShieldPowerup = MyShield.GetComponent<Shield>();
+        if (MyShieldPowerup)
+        {
+            MyShieldPowerup.ActivateShield();
+        }
     }
 }

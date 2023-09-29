@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum SpawnZone
@@ -29,7 +28,6 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        MyHealth.OnHealthChanged += OnHealthChanged;
         MyHealth.OnHealthDepleted += OnHealthDepleted;
 
         GameManager.OnStateChanged += OnStateChanged;
@@ -61,11 +59,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void OnHealthChanged(int NewHealth)
-    {
-
-    }
-
     void OnHealthDepleted()
     {
         Score MyScore = GetComponent<Score>();
@@ -74,26 +67,7 @@ public class EnemyController : MonoBehaviour
             MyScore.GiveScore();
         }
 
-        // Spawns score pickups on death
-        for (int i = 0; i < 3; i++)
-        {
-            GameObject MyScorePickupGameobject = PoolingManager.Instance.GetPooledScorePickup();
-            if (!MyScorePickupGameobject)
-            {
-                int ScorePickupToSpawn = UnityEngine.Random.Range(0, PoolingManager.Instance.ScorePickupPrefabs.Length);
-                MyScorePickupGameobject = Instantiate(PoolingManager.Instance.ScorePickupPrefabs[ScorePickupToSpawn]);
-            }
-
-            ScorePickup MyScorePickup = MyScorePickupGameobject.GetComponent<ScorePickup>();
-            if (!MyScorePickup)
-            {
-                Debug.LogError(name + ": MyScorePickupGameobject does not hold a ScorePickup component! Please add one.");
-            }
-            else 
-            {
-                MyScorePickup.WakeScorePickup(transform.position);
-            }
-        }
+        SpawnPickups();
 
         StopAllCoroutines();
         PoolingManager.Instance.AddPooledEnemy(this.gameObject);
@@ -120,5 +94,49 @@ public class EnemyController : MonoBehaviour
         }
 
         PoolingManager.Instance.AddPooledEnemy(this.gameObject);
+    }
+
+    void SpawnPickups()
+    {
+        // Spawns score pickups on death
+        for (int i = 0; i < UnityEngine.Random.Range(1, 4); i++)
+        {
+            GameObject MyScorePickupGameobject = PoolingManager.Instance.GetPooledScorePickup();
+            if (!MyScorePickupGameobject)
+            {
+                int ScorePickupToSpawn = UnityEngine.Random.Range(0, PoolingManager.Instance.ScorePickupPrefabs.Length);
+                MyScorePickupGameobject = Instantiate(PoolingManager.Instance.ScorePickupPrefabs[ScorePickupToSpawn]);
+            }
+
+            ScorePickup MyScorePickup = MyScorePickupGameobject.GetComponent<ScorePickup>();
+            if (!MyScorePickup)
+            {
+                Debug.LogError(name + ": MyScorePickupGameobject does not hold a ScorePickup component! Please add one.");
+            }
+            else 
+            {
+                MyScorePickup.WakeScorePickup(transform.position);
+            }
+        }
+
+        int PickupSpawnChance = UnityEngine.Random.Range(0, 4);
+        if (PickupSpawnChance == 3)
+        {
+            GameObject MyShieldPickupGameobject = PoolingManager.Instance.GetPooledShieldPickup();
+            if (!MyShieldPickupGameobject)
+            {
+                MyShieldPickupGameobject = Instantiate(PoolingManager.Instance.ShieldPickupPrefab);
+            }
+
+            ShieldPickup MyShieldPickup = MyShieldPickupGameobject.GetComponent<ShieldPickup>();
+            if (!MyShieldPickup)
+            {
+                Debug.LogError(name + ": MyShieldPickupGameobject does not hold a  ShieldPickup component! Please add one.");
+            }
+            else 
+            {
+                MyShieldPickup.WakeScorePickup(transform.position);
+            }
+        }
     }
 }

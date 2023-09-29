@@ -23,6 +23,11 @@ public class PoolingManager : MonoBehaviour
     public GameObject[] ScorePickupPrefabs;
     Queue<GameObject> ScorePickupPool;
 
+    [Header("Shield Pickup:")]
+    public int ShieldPickupPoolSize;
+    public GameObject ShieldPickupPrefab;
+    Queue<GameObject> ShieldPickupPool;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -40,6 +45,7 @@ public class PoolingManager : MonoBehaviour
         InitializeProjectilePool();
         InitializeEnemyPool();
         InitializeScorePickupPool();
+        InitializeShieldPickupPool();
     }
 
     void InitializeProjectilePool()
@@ -114,6 +120,31 @@ public class PoolingManager : MonoBehaviour
         Debug.Log("Score Pickup pool created, size: " + ScorePickupPool.Count.ToString());
     }
 
+    void InitializeShieldPickupPool()
+    {
+        if (!ShieldPickupPrefab)
+        {
+            Debug.LogError("Shield Pickup Prefab is null!");
+            return;
+        }
+
+        if (ShieldPickupPoolSize <= 0)
+        {
+            Debug.LogError("Shield Pickup pool size must be greater than 0");
+            return;
+        }
+
+        ShieldPickupPool = new Queue<GameObject>();
+        for (int i = 0; i < EnemyPoolSize; i++)
+        {
+            GameObject NewShieldPickup = Instantiate(ShieldPickupPrefab);
+            NewShieldPickup.SetActive(false);
+            ShieldPickupPool.Enqueue(NewShieldPickup);
+        }
+
+        Debug.Log("Shield Pickup pool created, size: " + ShieldPickupPool.Count.ToString());
+    }
+
     public GameObject GetPooledProjectile()
     {
         if (ProjectilePool.Count <= 0)
@@ -172,5 +203,25 @@ public class PoolingManager : MonoBehaviour
     {
         ScorePickupToAdd.SetActive(false);
         ScorePickupPool.Enqueue(ScorePickupToAdd);
+    }
+
+    public GameObject GetPooledShieldPickup()
+    {
+        if (ShieldPickupPool.Count <= 0)
+        {
+            Debug.LogWarning("Shield Pickup pool may be to small. No more Score Pickups to get, Queue is empty!");
+            return null;
+        }
+
+        // Pops a projectile from the pool and sets it to Active
+        GameObject PooledShieldPickup = ShieldPickupPool.Dequeue();
+        PooledShieldPickup.SetActive(true);
+        return PooledShieldPickup;
+    }
+
+    public void AddPooledShieldPickup(GameObject ShieldPickupToAdd)
+    {
+        ShieldPickupToAdd.SetActive(false);
+        ScorePickupPool.Enqueue(ShieldPickupToAdd);
     }
 }

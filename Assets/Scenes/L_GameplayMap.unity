@@ -743,6 +743,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447034817}
   m_CullTransparentMesh: 1
+--- !u!1001 &504576223
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549408949889723884, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
 --- !u!1 &808722063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2345,63 +2402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038e139d4c25d104c960a14c66cd7529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &2098938032
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723671, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549408949889723884, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ab5371b40fcc2304cba44b27b3e923bb, type: 3}
 --- !u!1 &2134986143
 GameObject:
   m_ObjectHideFlags: 0
@@ -2556,8 +2556,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1047295062977096851, guid: d45ebae85b162b849bc57e1b58166aba, type: 3}
     - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
+      propertyPath: ShieldPickupPrefab
+      value: 
+      objectReference: {fileID: 7131143630215309197, guid: 541980640666d5c448f1492047d0604f, type: 3}
+    - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
       propertyPath: ScorePickupPoolSize
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
+      propertyPath: ShieldPickupPoolSize
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
       propertyPath: ScorePickupPrefabs.Array.size

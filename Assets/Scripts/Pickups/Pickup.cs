@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
-public class ScorePickup : MonoBehaviour
+public class Pickup : MonoBehaviour
 {
-
     Rigidbody MyRigidBody;
 
     Vector3 OriginLocation;
@@ -33,19 +31,5 @@ public class ScorePickup : MonoBehaviour
         }
 
         PoolingManager.Instance.AddPooledScorePickup(this.gameObject);
-    }
-
-      private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            Score MyScore = GetComponent<Score>();
-            if (MyScore)
-            {
-                MyScore.GiveScore();
-            }
-
-            PoolingManager.Instance.AddPooledScorePickup(this.gameObject);
-        }
     }
 }
