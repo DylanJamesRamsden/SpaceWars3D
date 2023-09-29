@@ -12,9 +12,6 @@ public enum SpawnZone
 
 public class EnemyController : MonoBehaviour
 {
-
-    GameState CurrentGameState = GameState.Ready;
-
     public float ForwardMovementSpeed = .1f;
 
     Vector3 OriginLocation;
@@ -102,8 +99,6 @@ public class EnemyController : MonoBehaviour
 
     void OnStateChanged(GameState NewState)
     {
-        CurrentGameState = NewState;
-
         switch(NewState)
         {
             case GameState.Complete:

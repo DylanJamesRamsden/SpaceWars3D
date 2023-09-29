@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance = null;
 
     // Delegates
-    GameState CurrentGameState = GameState.Ready;
+    static GameState CurrentGameState = GameState.Ready;
     public delegate void StateChanged(GameState NewState);
     public static event StateChanged OnStateChanged;
 
@@ -104,5 +104,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
 
         ChangeState(GameState.Running);
+    }
+
+    GameState GetCurrentGameState()
+    {
+        return CurrentGameState;
     }
 }
