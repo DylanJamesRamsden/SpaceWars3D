@@ -27,7 +27,7 @@ public class Pickup : MonoBehaviour
     }
 
     /// <summary>
-    /// A coroutine that handles the movement of this projectile.
+    /// A coroutine that handles the movement of this Pickup.
     /// </summary>
     IEnumerator Move()
     {
