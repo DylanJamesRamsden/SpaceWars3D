@@ -28,6 +28,9 @@ public class Turret : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Wakes a PTurret up by starting it's Fire coroutine.
+    /// </summary>
     public void WakeTurret()
     {
         // All coroutines are flushed before we start a new one
@@ -36,6 +39,9 @@ public class Turret : MonoBehaviour
         StartCoroutine(Fire());
     }
 
+    /// <summary>
+    /// A coroutine that Fire's a projectile every given time interval.
+    /// </summary>
     IEnumerator Fire()
     {
         yield return new WaitForSeconds(FireRate);
@@ -65,6 +71,9 @@ public class Turret : MonoBehaviour
         StartCoroutine(Fire());
     }
 
+    /// <summary>
+    /// Starts the FireBoost power-up
+    /// </summary>
     public void ActivateFireBoost(float NewFireRate, float Duration)
     {
         StopAllCoroutines();
@@ -72,6 +81,9 @@ public class Turret : MonoBehaviour
         StartCoroutine(Fire());
     }
 
+    /// <summary>
+    /// A coroutine that increases the Turret's fire rate for a given amount of time.
+    /// </summary>
     IEnumerator FireBoost(float NewFireRate, float Duration)
     {
         float CachedFireRate = FireRate;
