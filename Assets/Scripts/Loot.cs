@@ -8,7 +8,7 @@ public class Loot : MonoBehaviour
 
     [Header("Score Pickups:")]
     // The Max number of Score Pickups that can be dropped
-    public int MaxToDrop;
+    public int MaxScoreToDrop = 1;
 
     [Header("Shield Pickups:")]
     // The Max number of Score Pickups that can be dropped
@@ -32,12 +32,12 @@ public class Loot : MonoBehaviour
     void OnHealthDepleted()
     {
          // Spawns score pickups on death
-        for (int i = 0; i < UnityEngine.Random.Range(1, 4); i++)
+        for (int i = 0; i < UnityEngine.Random.Range(1, MaxScoreToDrop + 1); i++)
         {
             GameObject MyScorePickupGameobject = PoolingManager.Instance.GetPooledScorePickup();
             if (!MyScorePickupGameobject)
             {
-                int ScorePickupToSpawn = UnityEngine.Random.Range(0, PoolingManager.Instance.ScorePickupPrefabs.Length);
+                int ScorePickupToSpawn = Random.Range(0, PoolingManager.Instance.ScorePickupPrefabs.Length);
                 MyScorePickupGameobject = Instantiate(PoolingManager.Instance.ScorePickupPrefabs[ScorePickupToSpawn]);
             }
 
@@ -53,7 +53,6 @@ public class Loot : MonoBehaviour
         }
 
         int ShieldDropChance = Random.Range(0, 101);
-        Debug.Log(100 - ProabilityToDropShield);
         if (ShieldDropChance >= 100 - ProabilityToDropShield)
         {
             GameObject MyShieldPickupGameobject = PoolingManager.Instance.GetPooledShieldPickup();

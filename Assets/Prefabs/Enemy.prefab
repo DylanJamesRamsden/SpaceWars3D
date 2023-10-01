@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa5f35b89d201e4ca93b0db864c81cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxToDrop: 0
+  MaxScoreToDrop: 3
   ProabilityToDropShield: 30
 --- !u!1001 &8478597121158333144
 PrefabInstance:
