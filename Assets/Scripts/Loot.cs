@@ -5,7 +5,7 @@ public class Loot : MonoBehaviour
 
     [Header("Score Pickups:")]
     // The Max number of Score Pickups that can be dropped
-    public int MaxScoreToDrop = 1;
+    public int MaxScorePickupsToDrop = 1;
 
     [Header("Powerups:")]
     // The Max number of Score Pickups that can be dropped
@@ -28,8 +28,8 @@ public class Loot : MonoBehaviour
 
     void OnHealthDepleted()
     {
-         // Spawns score pickups on death
-        for (int i = 0; i < Random.Range(1, MaxScoreToDrop + 1); i++)
+         // Spawns score pickups
+        for (int i = 0; i < Random.Range(1, MaxScorePickupsToDrop + 1); i++)
         {
             GameObject MyScorePickupGameobject = PoolingManager.Instance.GetPooledScorePickup();
             if (!MyScorePickupGameobject)
@@ -49,12 +49,13 @@ public class Loot : MonoBehaviour
             }
         }
 
+        // Spawns a pickup if the DropChance is hit
         int PowerupDropChance = Random.Range(0, 101);
         if (PowerupDropChance >= 100 - ProabilityToDropPowerup)
         {
             switch (Random.Range(1, 4))
             {
-                case 1:
+                case 1: // Shield Pickup
                     GameObject MyShieldPickupGameobject = PoolingManager.Instance.GetPooledShieldPickup();
                     if (!MyShieldPickupGameobject)
                     {
@@ -73,7 +74,7 @@ public class Loot : MonoBehaviour
                     }
 
                     break;
-                case 2:
+                case 2: // Health Pickup
                     GameObject MyHealthPickupObject = PoolingManager.Instance.GetPooledHealthPickup();
                     if (!MyHealthPickupObject)
                     {
@@ -91,7 +92,7 @@ public class Loot : MonoBehaviour
                     }
 
                     break;
-                case 3:
+                case 3: // FireBoost Pickup
                     GameObject MyFireBoostPickupGameobject = PoolingManager.Instance.GetPooledFireBoostPickup();
                     if (!MyFireBoostPickupGameobject)
                     {
