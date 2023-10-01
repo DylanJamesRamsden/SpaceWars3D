@@ -8,6 +8,9 @@ public class Pickup : MonoBehaviour
 
     Vector3 OriginLocation;
 
+    /// <summary>
+    /// Wakes a Pickup up by setting it's origin location and adding an impulse to it's rigidbody.
+    /// </summary>
     public void WakePickup(Vector3 Origin)
     {
         transform.position = Origin;
@@ -23,6 +26,9 @@ public class Pickup : MonoBehaviour
         StartCoroutine(Move());
     }
 
+    /// <summary>
+    /// A coroutine that handles the movement of this projectile.
+    /// </summary>
     IEnumerator Move()
     {
         while (Vector3.Distance(transform.position, OriginLocation) < 40.0f && isActiveAndEnabled)

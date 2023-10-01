@@ -6,6 +6,7 @@ public class ShieldPickup : Pickup
 {
     private void OnTriggerEnter(Collider other)
     {
+        // If this Pickup collides with a Player, it triggers the Shield powerup on the Player
         if (other.tag == "Player")
         {
             PlayerController PC = other.GetComponent<PlayerController>();

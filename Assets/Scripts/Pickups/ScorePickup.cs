@@ -7,6 +7,7 @@ public class ScorePickup : Pickup
 {
     private void OnTriggerEnter(Collider other)
     {
+        // If this Pickup collides with a Player, it notifies it's score component to add score to the Player
         if (other.tag == "Player")
         {
             Score MyScore = GetComponent<Score>();
