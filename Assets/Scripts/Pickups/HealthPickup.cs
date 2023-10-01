@@ -9,7 +9,7 @@ public class HealthPickup : Pickup
 
     private void OnTriggerEnter(Collider other)
     {
-        // If this Pickup collides with a Player, it triggers the Shield powerup on the Player
+        // If this Pickup collides with a Player, it adds Health to the Player's Health component
         if (other.tag == "Player")
         {
             PlayerController PC = other.GetComponent<PlayerController>();

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 public class Loot : MonoBehaviour
@@ -32,7 +29,7 @@ public class Loot : MonoBehaviour
     void OnHealthDepleted()
     {
          // Spawns score pickups on death
-        for (int i = 0; i < UnityEngine.Random.Range(1, MaxScoreToDrop + 1); i++)
+        for (int i = 0; i < Random.Range(1, MaxScoreToDrop + 1); i++)
         {
             GameObject MyScorePickupGameobject = PoolingManager.Instance.GetPooledScorePickup();
             if (!MyScorePickupGameobject)
@@ -67,7 +64,7 @@ public class Loot : MonoBehaviour
                     ShieldPickup MyShieldPickup = MyShieldPickupGameobject.GetComponent<ShieldPickup>();
                     if (!MyShieldPickup)
                     {
-                        Debug.LogError(name + ": MyShieldPickupGameobject does not hold a ShieldPickup component! Please add one.");
+                        Debug.LogError(name + ": MyShieldPickupGameobject does not hold a ShieldPickup component! Please add one."); 
                     }
                     else 
                     {
