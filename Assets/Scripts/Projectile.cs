@@ -7,8 +7,10 @@ public class Projectile : MonoBehaviour
 
     Vector3 OriginLocation;
 
+    // The speed at which the projectile moves
     public float ProjectileSpeed = .1f;
 
+    // The GameObject that fired this projectile
     public GameObject Owner;
 
     void Start()
@@ -27,6 +29,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Wakes a projectile up by setting it's origin location and rotation, as well as starting it's Move coroutine. It's Owner is also set.
+    /// </summary>
     public void WakeProjectile(Vector3 Origin, Quaternion Rotation, GameObject Instigator)
     {
         OriginLocation = Origin;
@@ -39,8 +44,9 @@ public class Projectile : MonoBehaviour
         StartCoroutine(Move());
     }
 
-    // This coroutine runs on every fixed update, updating the projectiles location until it reaches a certain distance
-    // Once a certain distance is reached, it is added back in the projectile pool
+    /// <summary>
+    /// A coroutine that moves a projectile a given distance from it's OriginLocation.
+    /// </summary>
     IEnumerator Move()
     {
         while (Vector3.Distance(transform.position, OriginLocation) < 30.0f && isActiveAndEnabled)  
