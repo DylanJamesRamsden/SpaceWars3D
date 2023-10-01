@@ -132,8 +132,8 @@ public class GameManager : MonoBehaviour
 
     void OnScoreChanged(int NewScore)
     {
-        // For the purpose of this test, just incrementing the level every 300 points
-        if (NewScore >= CurrentLevel * 100)
+        // For the purpose of this test, just incrementing the level every 250 points
+        if (NewScore >= CurrentLevel * 250)
         {
             int NewLevel = CurrentLevel + 1;
             ChangeLevel(NewLevel);
