@@ -16,6 +16,8 @@ public class ShieldPickup : Pickup
             }
 
             PoolingManager.Instance.AddPooledShieldPickup(this.gameObject);
+
+            SoundManager.Instance.PlayPickupRecievedSound();
         }
     }
 }

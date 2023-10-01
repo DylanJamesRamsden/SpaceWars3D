@@ -19,6 +19,8 @@ public class HealthPickup : Pickup
             }
 
             PoolingManager.Instance.AddPooledHealthPickup(this.gameObject);
+
+            SoundManager.Instance.PlayPickupRecievedSound();
         }
     }
 }

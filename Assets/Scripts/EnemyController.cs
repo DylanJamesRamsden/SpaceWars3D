@@ -76,6 +76,8 @@ public class EnemyController : MonoBehaviour
         // All coroutines are stopped and the Enemy is pooled
         StopAllCoroutines();
         PoolingManager.Instance.AddPooledEnemy(this.gameObject);
+
+        SoundManager.Instance.PlayShipDestroyedSound();
     }
 
     void OnStateChanged(GameState NewState)

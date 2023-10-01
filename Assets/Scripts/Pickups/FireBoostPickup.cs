@@ -20,6 +20,8 @@ public class FireBoostPickup : Pickup
             }
 
             PoolingManager.Instance.AddPooledFireBoostPickup(this.gameObject);
+
+            SoundManager.Instance.PlayPickupRecievedSound();
         }
     }
 }

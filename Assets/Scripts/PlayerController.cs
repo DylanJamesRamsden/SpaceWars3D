@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector3.zero;
 
         OnPlayerDeath.Invoke();
+
+        SoundManager.Instance.PlayShipDestroyedSound();
     }
 
     // Don't see a need to run this logic in a coroutine, FixedUpdate seem's fine for input
