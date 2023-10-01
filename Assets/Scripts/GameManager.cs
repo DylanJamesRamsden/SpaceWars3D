@@ -22,9 +22,9 @@ public class GameManager : MonoBehaviour
     public delegate void StateChanged(GameState NewState);
     public static event StateChanged OnStateChanged;
 
-    int CurrentLevel = 1;
+    static int CurrentLevel = 1;
     public delegate void LevelChanged(int NewLevel);
-    public event LevelChanged OnLevelChanged;
+    public static event LevelChanged OnLevelChanged;
 
     // Start is called before the first frame update
     void Awake()
@@ -53,6 +53,18 @@ public class GameManager : MonoBehaviour
         // NB! If nothing is registered to listen to OnStateChanged, it will throw a null error
         CurrentGameState = NewState;
         OnStateChanged.Invoke(CurrentGameState);
+
+        switch(CurrentGameState)
+        {
+            case GameState.Running:
+                PlayerController.OnScoreChanged += OnScoreChanged;
+
+                CurrentLevel = 1;
+                break;
+            case GameState.Complete:
+                PlayerController.OnScoreChanged -= OnScoreChanged;
+                break;
+        }
 
         Debug.Log("New game state: " + NewState.ToString());
     }
@@ -106,8 +118,12 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.Running);
     }
 
-    GameState GetCurrentGameState()
+    void OnScoreChanged(int NewScore)
     {
-        return CurrentGameState;
+        // For the purpose of this test, just incrementing the level every 300 points
+        if (NewScore >= CurrentLevel * 300)
+        {
+            NextLevel();
+        }
     }
 }

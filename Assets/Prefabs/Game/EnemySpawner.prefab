@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e14cf402e122ed4b9a8b5eee4c22fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IntervalBetweenWaveSpawn: 0
+  WaveSize: 0
+  TopSpawnZone: {fileID: 0}
+  SideSpawnZones: []

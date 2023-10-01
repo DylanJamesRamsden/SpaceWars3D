@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         GameManager.OnStateChanged += OnStateChanged;
-        GameManager.Instance.OnLevelChanged += OnLevelChanged;
+        GameManager.OnLevelChanged += OnLevelChanged;
     }
 
     void OnStateChanged(GameState NewState)
@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(IntervalBetweenWaveSpawn);
 
-        for (int i = 0; i < WaveSize; i++)
+        for (int i = 0; i < Random.Range(1, WaveSize); i++)
         {
             SpawnEnemy();
         }

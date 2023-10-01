@@ -11,8 +11,10 @@ public class UIManager : MonoBehaviour
     public GameObject PlayerHUD;
     public GameObject PauseMenu;
 
+    [Header("Text:")]
     public Text ScoreText;
     public Text EndGameScoreText;
+    public Text LevelText;
 
     int CurrentScore;
 
@@ -20,6 +22,8 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         GameManager.OnStateChanged += OnStateChanged;
+        GameManager.OnLevelChanged += OnLevelChanged;
+
         PlayerController.OnScoreChanged += OnScoreChanged;
     }
 
@@ -54,5 +58,10 @@ public class UIManager : MonoBehaviour
         CurrentScore = NewScore;
 
         ScoreText.text = CurrentScore.ToString();
+    }
+
+    void OnLevelChanged(int NewLevel)
+    {
+        LevelText.text = NewLevel.ToString();
     }
 }
