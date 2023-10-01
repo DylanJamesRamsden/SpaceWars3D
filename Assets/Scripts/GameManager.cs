@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public delegate void StateChanged(GameState NewState);
     public static event StateChanged OnStateChanged;
 
-    static int CurrentLevel = 1;
+    public int CurrentLevel = 1;
     public delegate void LevelChanged(int NewLevel);
     public static event LevelChanged OnLevelChanged;
 
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
             case GameState.Running:
                 PlayerController.OnScoreChanged += OnScoreChanged;
 
-                CurrentLevel = 1;
+                ChangeLevel(1);
                 break;
             case GameState.Complete:
                 PlayerController.OnScoreChanged -= OnScoreChanged;
@@ -72,14 +72,14 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Increments the level.
+    /// Changes the level.
     /// </summary>
-    void NextLevel()
+    void ChangeLevel(int NewLevel)
     {
         if (CurrentGameState != GameState.Running)
             return;
 
-        CurrentLevel++;
+        CurrentLevel = NewLevel;
         OnLevelChanged.Invoke(CurrentLevel);
 
         Debug.Log("Level changed, new level: " + CurrentLevel.ToString());
@@ -133,9 +133,10 @@ public class GameManager : MonoBehaviour
     void OnScoreChanged(int NewScore)
     {
         // For the purpose of this test, just incrementing the level every 300 points
-        if (NewScore >= CurrentLevel * 300)
+        if (NewScore >= CurrentLevel * 100)
         {
-            NextLevel();
+            int NewLevel = CurrentLevel + 1;
+            ChangeLevel(NewLevel);
         }
     }
 }

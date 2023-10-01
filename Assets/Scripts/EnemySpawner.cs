@@ -33,6 +33,7 @@ public class EnemySpawner : MonoBehaviour
         {
             case GameState.Running:
                 StartCoroutine(SpawnWave());
+                WaveSize = 1;
                 break;
             case GameState.Complete:
                 StopAllCoroutines();
@@ -42,8 +43,7 @@ public class EnemySpawner : MonoBehaviour
 
     void OnLevelChanged(int NewLevel)
     {
-        IntervalBetweenWaveSpawn -= 0.2f;
-        WaveSize = Mathf.Clamp(NewLevel, 1 , MaxWaveSize);
+        WaveSize = Mathf.Clamp(NewLevel, 1 , MaxWaveSize); 
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ public class EnemySpawner : MonoBehaviour
     Vector3 GetRandomLocationInSpawnZone(BoxCollider SpawnZone)
     {
         // @TODO this isn't working based on rotation, look into
-        float Width = SpawnZone.size.z / 2;
+        float Width = SpawnZone.size.x / 2;
 
         return new Vector3(Random.Range(SpawnZone.transform.position.x - Width, SpawnZone.transform.position.x + Width), SpawnZone.transform.position.y, SpawnZone.transform.position.z);
     }

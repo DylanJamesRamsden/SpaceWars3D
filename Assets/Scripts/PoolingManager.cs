@@ -326,7 +326,7 @@ public class PoolingManager : MonoBehaviour
     public void AddPooledShieldPickup(GameObject ShieldPickupToAdd)
     {
         ShieldPickupToAdd.SetActive(false);
-        ScorePickupPool.Enqueue(ShieldPickupToAdd);
+        ShieldPickupPool.Enqueue(ShieldPickupToAdd);
     }
     
     /// <summary>

@@ -20,7 +20,7 @@ public class Pickup : MonoBehaviour
         {
             Debug.LogError(name + " has attached Rigidbody, please add one!");
         }
-        Vector3 ForceToAdd = new Vector3(Random.Range(-3.0f, 3.0f), Random.Range(1.0f, 5.0f), 0.0f);
+        Vector3 ForceToAdd = new Vector3(Random.Range(-3.0f, 3.0f), 5.0f, 0.0f);
         MyRigidBody.AddForce(ForceToAdd, ForceMode.Impulse);
 
         StartCoroutine(Move());

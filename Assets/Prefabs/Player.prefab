@@ -288,7 +288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6430275231986194474, guid: c008adc33f0813445aba64b2e63e147f, type: 3}
       propertyPath: BaseFireRate
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c008adc33f0813445aba64b2e63e147f, type: 3}
@@ -354,7 +354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6430275231986194474, guid: c008adc33f0813445aba64b2e63e147f, type: 3}
       propertyPath: BaseFireRate
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c008adc33f0813445aba64b2e63e147f, type: 3}
