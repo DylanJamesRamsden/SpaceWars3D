@@ -10,15 +10,22 @@ public class Health : MonoBehaviour
     public delegate void HealthDepleted();
     public event HealthDepleted OnHealthDepleted;
 
+    // The Max Health this component can have
     public int MaxHealth = 3;
 
     int CurrentHealth;
 
+    /// <summary>
+    /// Resets the current Health to MaxHealth.
+    /// </summary>
     public void InitializeHealth()
     {
         CurrentHealth = MaxHealth;
     }
 
+    /// <summary>
+    /// Adds Health to CurrentHealth.
+    /// </summary>
     public void AddHealth(int AmountToAdd)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth + AmountToAdd, 0, MaxHealth);
