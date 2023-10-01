@@ -80,6 +80,7 @@ public class EnemySpawner : MonoBehaviour
         else 
         {
             Vector3 SpawnLocation = GetRandomLocationInSpawnZone(SpawnZone);
+            Debug.Log(SpawnLocation);
             Vector3 LookAtLocation = new Vector3(SpawnLocation.x, SpawnZone.transform.forward.y * 10, SpawnLocation.z);
             Debug.DrawLine(SpawnLocation, LookAtLocation, Color.red, 10.0f);
 
@@ -93,7 +94,7 @@ public class EnemySpawner : MonoBehaviour
     Vector3 GetRandomLocationInSpawnZone(BoxCollider SpawnZone)
     {
         // @TODO this isn't working based on rotation, look into
-        float Width = SpawnZone.size.x / 2;
+        float Width = SpawnZone.size.z / 2;
 
         return new Vector3(Random.Range(SpawnZone.transform.position.x - Width, SpawnZone.transform.position.x + Width), SpawnZone.transform.position.y, SpawnZone.transform.position.z);
     }

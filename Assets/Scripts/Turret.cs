@@ -6,7 +6,8 @@ public class Turret : MonoBehaviour
 {
 
     // The rate in seconds in which this turret fires
-    public float FireRate = 1.0f;
+    public float BaseFireRate = 1.0f;
+    float CurrentFireRate;
 
     GameState CurrentGameState = GameState.Ready;
 
@@ -37,6 +38,8 @@ public class Turret : MonoBehaviour
         StopAllCoroutines();
 
         StartCoroutine(Fire());
+
+        CurrentFireRate = BaseFireRate;
     }
 
     /// <summary>
@@ -44,7 +47,7 @@ public class Turret : MonoBehaviour
     /// </summary>
     IEnumerator Fire()
     {
-        yield return new WaitForSeconds(FireRate);
+        yield return new WaitForSeconds(CurrentFireRate);
 
         // If the game state changes and is not Ready, just return this coroutine as we don't want to fire unless we are Running
         if (CurrentGameState != GameState.Running)
@@ -77,6 +80,10 @@ public class Turret : MonoBehaviour
     public void ActivateFireBoost(float NewFireRate, float Duration)
     {
         StopAllCoroutines();
+
+        // Reseting the FireRate incase FireBoost was stopped and has left the FireRate at the boosted FireRate
+        CurrentFireRate = BaseFireRate;
+
         StartCoroutine(FireBoost(NewFireRate, Duration));
         StartCoroutine(Fire());
     }
@@ -86,12 +93,10 @@ public class Turret : MonoBehaviour
     /// </summary>
     IEnumerator FireBoost(float NewFireRate, float Duration)
     {
-        float CachedFireRate = FireRate;
-
-        FireRate = NewFireRate;
+        CurrentFireRate = NewFireRate;
 
         yield return new WaitForSeconds(Duration);
 
-        FireRate = CachedFireRate;
+        CurrentFireRate = BaseFireRate;
     }
 }
