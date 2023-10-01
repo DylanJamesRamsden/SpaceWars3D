@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
     // Don't see a need to run this logic in a coroutine, FixedUpdate seem's fine for input
     void FixedUpdate()
     {
+        // NB! Not using the new input system as it takes longer to set-up and for the input we require (a touch) it's just easier to implement it
+        // through the old input system
         if (Input.touchCount > 0 && CurrentGameState == GameState.Running)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
