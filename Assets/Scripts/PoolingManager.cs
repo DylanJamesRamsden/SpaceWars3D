@@ -60,6 +60,9 @@ public class PoolingManager : MonoBehaviour
         InitializeFireBoostPickupPool();
     }
 
+    /// <summary>
+    /// Initializes and creates the Projectile pool.
+    /// </summary>
     void InitializeProjectilePool()
     {
         if (!ProjectilePrefab)
@@ -85,6 +88,9 @@ public class PoolingManager : MonoBehaviour
         Debug.Log("Projectile pool created, size: " + ProjectilePoolSize.ToString());
     }
 
+    /// <summary>
+    /// Initializes and creates the Enemy pool.
+    /// </summary>
     void InitializeEnemyPool()
     {
         if (!EnemyPrefab)
@@ -110,6 +116,9 @@ public class PoolingManager : MonoBehaviour
         Debug.Log("Enemy pool created, size: " + EnemyPoolSize.ToString());
     }
 
+    /// <summary>
+    /// Initializes and creates the Score pick-up pool.
+    /// </summary>
     void InitializeScorePickupPool()
     {
         if (ScorePickupPrefabs.Length <= 0)
@@ -132,6 +141,9 @@ public class PoolingManager : MonoBehaviour
         Debug.Log("Score Pickup pool created, size: " + ScorePickupPool.Count.ToString());
     }
 
+    /// <summary>
+    /// Initializes and creates the Shield pick-up pool.
+    /// </summary>
     void InitializeShieldPickupPool()
     {
         if (!ShieldPickupPrefab)
@@ -157,6 +169,9 @@ public class PoolingManager : MonoBehaviour
         Debug.Log("Shield Pickup pool created, size: " + ShieldPickupPool.Count.ToString());
     }
 
+    /// <summary>
+    /// Initializes and creates the Health pick-up pool.
+    /// </summary>
     void InitializeHealthPickupPool()
     {
         if (!HealthPickupPrefab)
@@ -182,6 +197,9 @@ public class PoolingManager : MonoBehaviour
         Debug.Log("Health Pickup pool created, size: " + HealthPickupPoolSize.ToString());
     }
 
+    /// <summary>
+    /// Initializes and creates the FireBoose pick-up pool.
+    /// </summary>
     void InitializeFireBoostPickupPool()
     {
         if (!FireBoostPickupPrefab)
@@ -207,6 +225,9 @@ public class PoolingManager : MonoBehaviour
         Debug.Log("Fire Boost Pickup pool created, size: " + FireBoostPickupPoolSize.ToString());
     }
 
+    /// <summary>
+    /// Gets and activates a projectile from the ProjectilePool.
+    /// </summary>
     public GameObject GetPooledProjectile()
     {
         if (ProjectilePool.Count <= 0)
@@ -221,12 +242,18 @@ public class PoolingManager : MonoBehaviour
         return PooledProjectile;
     }
 
+    /// <summary>
+    /// Deactivates and add's a projectile to the ProjectilePool.
+    /// </summary>
     public void AddPooledProjectile(GameObject ProjectileToAdd)
     {
         ProjectileToAdd.SetActive(false);
         ProjectilePool.Enqueue(ProjectileToAdd);
     }
 
+    /// <summary>
+    /// Gets and activates a Enemy from the EnemyPool.
+    /// </summary>
     public GameObject GetPooledEnemy()
     {
         if (EnemyPool.Count <= 0)
@@ -241,12 +268,18 @@ public class PoolingManager : MonoBehaviour
         return PooledEnemy;
     }
 
+    /// <summary>
+    /// Deactivates and add's a Enemy to the EnemyPool.
+    /// </summary>
     public void AddPooledEnemy(GameObject EnemyToAdd)
     {
         EnemyToAdd.SetActive(false);
         EnemyPool.Enqueue(EnemyToAdd);
     }
 
+    /// <summary>
+    /// Gets and activates a Score pick-up from the ScorePickupPool..
+    /// </summary>
     public GameObject GetPooledScorePickup()
     {
         if (ScorePickupPool.Count <= 0)
@@ -261,12 +294,18 @@ public class PoolingManager : MonoBehaviour
         return PooledScorePickup;
     }
 
+    /// <summary>
+    /// Deactivates and add's a Score pick-up to the ScorePickupPool.
+    /// </summary>
     public void AddPooledScorePickup(GameObject ScorePickupToAdd)
     {
         ScorePickupToAdd.SetActive(false);
         ScorePickupPool.Enqueue(ScorePickupToAdd);
     }
 
+    /// <summary>
+    /// Gets and activates a Shield pick-up from the ShieldPickupPool.
+    /// </summary>
     public GameObject GetPooledShieldPickup()
     {
         if (ShieldPickupPool.Count <= 0)
@@ -281,12 +320,18 @@ public class PoolingManager : MonoBehaviour
         return PooledShieldPickup;
     }
 
+    /// <summary>
+    /// Deactivates and add's a Shield pick-up to the ShieldPickupPool.
+    /// </summary>
     public void AddPooledShieldPickup(GameObject ShieldPickupToAdd)
     {
         ShieldPickupToAdd.SetActive(false);
         ScorePickupPool.Enqueue(ShieldPickupToAdd);
     }
     
+    /// <summary>
+    /// Gets and activates a Health pick-up from the HealthPickupPool.
+    /// </summary>
     public GameObject GetPooledHealthPickup()
     {
         if (HealthPickupPool.Count <= 0)
@@ -301,12 +346,18 @@ public class PoolingManager : MonoBehaviour
         return PooledHealthPickup;
     }
 
+    /// <summary>
+    /// Deactivates and add's a Health pick-up to the HealthPickupPool.
+    /// </summary>
     public void AddPooledHealthPickup(GameObject HealthPickupToAdd)
     {
         HealthPickupToAdd.SetActive(false);
         HealthPickupPool.Enqueue(HealthPickupToAdd);
     }
 
+    /// <summary>
+    /// Gets and activates a FireBoost pick-up from the FireBoostPickupPool.
+    /// </summary>
     public GameObject GetPooledFireBoostPickup()
     {
         if (FireBoostPickupPool.Count <= 0)
@@ -321,6 +372,9 @@ public class PoolingManager : MonoBehaviour
         return PooledFireBoostPickup;
     }
 
+    /// <summary>
+    /// Deactivates and add's a FireBoost pick-up to the FireBoostPickupPool.
+    /// </summary>
     public void AddPooledFireBoostPickup(GameObject FireBoostPickupToAdd)
     {
         FireBoostPickupToAdd.SetActive(false);
