@@ -96,6 +96,7 @@ public class EnemyController : MonoBehaviour
         PoolingManager.Instance.AddPooledEnemy(this.gameObject);
     }
 
+    // @TODO Maybe add a loot comp and handle all this logic there
     void SpawnPickups()
     {
         // Spawns score pickups on death
@@ -115,7 +116,7 @@ public class EnemyController : MonoBehaviour
             }
             else 
             {
-                MyScorePickup.WakeScorePickup(transform.position);
+                MyScorePickup.WakePickup(transform.position);
             }
         }
 
@@ -135,7 +136,7 @@ public class EnemyController : MonoBehaviour
             }
             else 
             {
-                MyShieldPickup.WakeScorePickup(transform.position);
+                MyShieldPickup.WakePickup(transform.position);
             }
         }
     }

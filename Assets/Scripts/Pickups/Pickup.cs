@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    Rigidbody MyRigidBody;
+        Rigidbody MyRigidBody;
 
     Vector3 OriginLocation;
 
-    public void WakeScorePickup(Vector3 Origin)
+    public void WakePickup(Vector3 Origin)
     {
         transform.position = Origin;
 
