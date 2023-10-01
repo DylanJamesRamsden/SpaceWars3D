@@ -69,25 +69,17 @@ public class Turret : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(FireBoost(NewFireRate, Duration));
+        StartCoroutine(Fire());
     }
 
     IEnumerator FireBoost(float NewFireRate, float Duration)
     {
-        float CurrentFireRate = FireRate;
+        float CachedFireRate = FireRate;
 
         FireRate = NewFireRate;
 
-        // Flushing out the Fire coroutine as the yeidl time it waits should instantly be based off the new firerate
-        StopAllCoroutines();
-
-        Debug.Log("Startedf fire boost");
-
         yield return new WaitForSeconds(Duration);
 
-        FireRate = CurrentFireRate;
-
-        Debug.Log("Ended fire boost");
-
-        yield return null;
+        FireRate = CachedFireRate;
     }
 }
