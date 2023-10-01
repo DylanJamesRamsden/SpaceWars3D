@@ -209,7 +209,7 @@ public class PoolingManager : MonoBehaviour
     {
         if (ShieldPickupPool.Count <= 0)
         {
-            Debug.LogWarning("Shield Pickup pool may be to small. No more Score Pickups to get, Queue is empty!");
+            Debug.LogWarning("Shield Pickup pool may be to small. No more Shield Pickups to get, Queue is empty!");
             return null;
         }
 
