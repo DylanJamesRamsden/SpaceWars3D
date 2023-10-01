@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    Health MyHealth;
+
     [Header("PowerUps")]
     public GameObject MyShield;
 
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Health MyHealth = GetComponent<Health>();
+        MyHealth = GetComponent<Health>();
         if (!MyHealth)
         {
             Debug.LogError("Add health component to Enemy prefab!");
@@ -123,6 +125,23 @@ public class PlayerController : MonoBehaviour
         if (MyShieldPowerup)
         {
             MyShieldPowerup.ActivateShield();
+        }
+    }
+
+    public void AddHealth(int AmountToAdd)
+    {
+        if (!MyHealth)
+            return;
+        
+        MyHealth.AddHealth(AmountToAdd);
+    }
+
+    public void ActivateFireBoost(float NewFireRate, float Duration)
+    {
+        Turret[] Turrets = GetComponentsInChildren<Turret>();
+        foreach (Turret T in Turrets)
+        {
+            T.ActivateFireBoost(NewFireRate, Duration);
         }
     }
 }

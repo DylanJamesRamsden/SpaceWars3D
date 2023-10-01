@@ -3091,6 +3091,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1047295062977096851, guid: d45ebae85b162b849bc57e1b58166aba, type: 3}
     - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
+      propertyPath: HealthPickupPrefab
+      value: 
+      objectReference: {fileID: 1770111157763287262, guid: d6abb38f80dda95458be9e6e771cbd40, type: 3}
+    - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
       propertyPath: ShieldPickupPrefab
       value: 
       objectReference: {fileID: 7131143630215309197, guid: 541980640666d5c448f1492047d0604f, type: 3}
@@ -3099,8 +3103,20 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
+      propertyPath: HealthPickupPoolSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
       propertyPath: ShieldPickupPoolSize
-      value: 5
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
+      propertyPath: FireBoostPickupPrefab
+      value: 
+      objectReference: {fileID: 1770111157763287262, guid: 858c1917e795161488a0ad56e379fce7, type: 3}
+    - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
+      propertyPath: FireBoostPickupPoolSize
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8208117334015439907, guid: c79204fc46bf8f24e9d5bb269986ac42, type: 3}
       propertyPath: ScorePickupPrefabs.Array.size

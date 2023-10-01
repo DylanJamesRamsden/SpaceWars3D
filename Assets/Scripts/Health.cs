@@ -19,6 +19,11 @@ public class Health : MonoBehaviour
         CurrentHealth = MaxHealth;
     }
 
+    public void AddHealth(int AmountToAdd)
+    {
+        CurrentHealth = Mathf.Clamp(CurrentHealth + AmountToAdd, 0, MaxHealth);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Projectile")

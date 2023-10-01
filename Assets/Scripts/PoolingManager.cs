@@ -28,6 +28,16 @@ public class PoolingManager : MonoBehaviour
     public GameObject ShieldPickupPrefab;
     Queue<GameObject> ShieldPickupPool;
 
+    [Header("Health Pickup:")]
+    public int HealthPickupPoolSize;
+    public GameObject HealthPickupPrefab;
+    Queue<GameObject> HealthPickupPool;
+
+    [Header("Fire Boost Pickup:")]
+    public int FireBoostPickupPoolSize;
+    public GameObject FireBoostPickupPrefab;
+    Queue<GameObject> FireBoostPickupPool;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -46,6 +56,8 @@ public class PoolingManager : MonoBehaviour
         InitializeEnemyPool();
         InitializeScorePickupPool();
         InitializeShieldPickupPool();
+        InitializeHealthPickupPool();
+        InitializeFireBoostPickupPool();
     }
 
     void InitializeProjectilePool()
@@ -145,6 +157,56 @@ public class PoolingManager : MonoBehaviour
         Debug.Log("Shield Pickup pool created, size: " + ShieldPickupPool.Count.ToString());
     }
 
+    void InitializeHealthPickupPool()
+    {
+        if (!HealthPickupPrefab)
+        {
+            Debug.LogError("Health Pickup Prefab is null!");
+            return;
+        }
+
+        if (HealthPickupPoolSize <= 0)
+        {
+            Debug.LogError("Health Pickup pool size must be greater than 0");
+            return;
+        }
+
+        HealthPickupPool = new Queue<GameObject>();
+        for (int i = 0; i < HealthPickupPoolSize; i++)
+        {
+            GameObject NewHealthPickup = Instantiate(HealthPickupPrefab);
+            NewHealthPickup.SetActive(false);
+            HealthPickupPool.Enqueue(NewHealthPickup);
+        }
+
+        Debug.Log("Health Pickup pool created, size: " + HealthPickupPoolSize.ToString());
+    }
+
+    void InitializeFireBoostPickupPool()
+    {
+        if (!FireBoostPickupPrefab)
+        {
+            Debug.LogError("Fire Boost Pickup Prefab is null!");
+            return;
+        }
+
+        if (FireBoostPickupPoolSize <= 0)
+        {
+            Debug.LogError("Fire Boost Pickup pool size must be greater than 0");
+            return;
+        }
+
+        FireBoostPickupPool = new Queue<GameObject>();
+        for (int i = 0; i < FireBoostPickupPoolSize; i++)
+        {
+            GameObject NewFireBoostPickup = Instantiate(FireBoostPickupPrefab);
+            NewFireBoostPickup.SetActive(false);
+            FireBoostPickupPool.Enqueue(NewFireBoostPickup);
+        }
+
+        Debug.Log("Fire Boost Pickup pool created, size: " + FireBoostPickupPoolSize.ToString());
+    }
+
     public GameObject GetPooledProjectile()
     {
         if (ProjectilePool.Count <= 0)
@@ -223,5 +285,45 @@ public class PoolingManager : MonoBehaviour
     {
         ShieldPickupToAdd.SetActive(false);
         ScorePickupPool.Enqueue(ShieldPickupToAdd);
+    }
+    
+    public GameObject GetPooledHealthPickup()
+    {
+        if (HealthPickupPool.Count <= 0)
+        {
+            Debug.LogWarning("Health Pickup pool may be to small. No more Health Pickups to get, Queue is empty!");
+            return null;
+        }
+
+        // Pops a projectile from the pool and sets it to Active
+        GameObject PooledHealthPickup = HealthPickupPool.Dequeue();
+        PooledHealthPickup.SetActive(true);
+        return PooledHealthPickup;
+    }
+
+    public void AddPooledHealthPickup(GameObject HealthPickupToAdd)
+    {
+        HealthPickupToAdd.SetActive(false);
+        HealthPickupPool.Enqueue(HealthPickupToAdd);
+    }
+
+    public GameObject GetPooledFireBoostPickup()
+    {
+        if (FireBoostPickupPool.Count <= 0)
+        {
+            Debug.LogWarning("Fire Boost Pickup pool may be to small. No more Fire Boost Pickups to get, Queue is empty!");
+            return null;
+        }
+
+        // Pops a projectile from the pool and sets it to Active
+        GameObject PooledFireBoostPickup = FireBoostPickupPool.Dequeue();
+        PooledFireBoostPickup.SetActive(true);
+        return PooledFireBoostPickup;
+    }
+
+    public void AddPooledFireBoostPickup(GameObject FireBoostPickupToAdd)
+    {
+        FireBoostPickupToAdd.SetActive(false);
+        FireBoostPickupPool.Enqueue(FireBoostPickupToAdd);
     }
 }

@@ -10,11 +10,11 @@ public class Loot : MonoBehaviour
     // The Max number of Score Pickups that can be dropped
     public int MaxScoreToDrop = 1;
 
-    [Header("Shield Pickups:")]
+    [Header("Powerups:")]
     // The Max number of Score Pickups that can be dropped
     [Range(1, 100)]
     // The probability at which a Shield Pickup can drop (Between 1 and 100)
-    public int ProabilityToDropShield = 1;
+    public int ProabilityToDropPowerup = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -52,23 +52,66 @@ public class Loot : MonoBehaviour
             }
         }
 
-        int ShieldDropChance = Random.Range(0, 101);
-        if (ShieldDropChance >= 100 - ProabilityToDropShield)
+        int PowerupDropChance = Random.Range(0, 101);
+        if (PowerupDropChance >= 100 - ProabilityToDropPowerup)
         {
-            GameObject MyShieldPickupGameobject = PoolingManager.Instance.GetPooledShieldPickup();
-            if (!MyShieldPickupGameobject)
+            switch (Random.Range(1, 4))
             {
-                MyShieldPickupGameobject = Instantiate(PoolingManager.Instance.ShieldPickupPrefab);
-            }
+                case 1:
+                    GameObject MyShieldPickupGameobject = PoolingManager.Instance.GetPooledShieldPickup();
+                    if (!MyShieldPickupGameobject)
+                    {
+                        MyShieldPickupGameobject = Instantiate(PoolingManager.Instance.ShieldPickupPrefab);
+                    }
 
-            ShieldPickup MyShieldPickup = MyShieldPickupGameobject.GetComponent<ShieldPickup>();
-            if (!MyShieldPickup)
-            {
-                Debug.LogError(name + ": MyShieldPickupGameobject does not hold a  ShieldPickup component! Please add one.");
-            }
-            else 
-            {
-                MyShieldPickup.WakePickup(transform.position);
+                    ShieldPickup MyShieldPickup = MyShieldPickupGameobject.GetComponent<ShieldPickup>();
+                    if (!MyShieldPickup)
+                    {
+                        Debug.LogError(name + ": MyShieldPickupGameobject does not hold a ShieldPickup component! Please add one.");
+                    }
+                    else 
+                    {
+                        MyShieldPickup.WakePickup(transform.position);
+                    
+                    }
+
+                    break;
+                case 2:
+                    GameObject MyHealthPickupObject = PoolingManager.Instance.GetPooledHealthPickup();
+                    if (!MyHealthPickupObject)
+                    {
+                        MyHealthPickupObject = Instantiate(PoolingManager.Instance.HealthPickupPrefab);
+                    }
+
+                    HealthPickup MyHealthPickup = MyHealthPickupObject.GetComponent<HealthPickup>();
+                    if (!MyHealthPickup)
+                    {
+                        Debug.LogError(name + ": MyHealthPickupGameobject does not hold a HealthPickup component! Please add one.");
+                    }
+                    else 
+                    {
+                        MyHealthPickup.WakePickup(transform.position);
+                    }
+
+                    break;
+                case 3:
+                    GameObject MyFireBoostPickupGameobject = PoolingManager.Instance.GetPooledFireBoostPickup();
+                    if (!MyFireBoostPickupGameobject)
+                    {
+                        MyFireBoostPickupGameobject = Instantiate(PoolingManager.Instance.FireBoostPickupPrefab);
+                    }
+
+                    FireBoostPickup MyFireBoostPickup = MyFireBoostPickupGameobject.GetComponent<FireBoostPickup>();
+                    if (!MyFireBoostPickup)
+                    {
+                        Debug.LogError(name + ": MyFireBoostPickupGameobject does not hold a MyFireBoost component! Please add one.");
+                    }
+                    else 
+                    {
+                        MyFireBoostPickup.WakePickup(transform.position);
+                    }
+
+                    break;
             }
         }
     }
