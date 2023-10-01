@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
         GameManager.OnStateChanged += OnStateChanged;
 
+        // The screen bounds is calculated in world space
         Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
         Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
         ScreenSpaceRect = new Rect(bottomLeft.x, bottomLeft.y, topRight.x * 2f, topRight.y * 2f);
@@ -49,58 +50,54 @@ public class PlayerController : MonoBehaviour
         OnPlayerDeath.Invoke();
     }
 
-    void OnStateChanged(GameState NewState)
+    // Don't see a need to run this logic in a coroutine, FixedUpdate seem's fine for input
+    void FixedUpdate()
     {
-        CurrentGameState = NewState;
-
-        if (CurrentGameState == GameState.Running)
+        if (Input.touchCount > 0 && CurrentGameState == GameState.Running)
         {
-            // Resets the player score
-            // @TODO look to move this into it's own component
-            Score = 0;
-            OnScoreChanged.Invoke(Score);
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 
-            StartCoroutine(InputDetection());
-
-            Turret[] Turrets = GetComponentsInChildren<Turret>();
-            foreach (Turret T in Turrets)
+            // A raycast that returns the distance at which the ray intersected with the movement plane
+            if (MovementPlane.Raycast(ray, out float Distance))
             {
-                T.WakeTurret();
-            }
-
-            Health MyHealth = GetComponent<Health>();
-            if (!MyHealth)
-            {
-                Debug.LogError("Add health component to Enemy prefab!");
-            }
-            else
-            {
-                MyHealth.InitializeHealth();
+                // Position is clamped to screen bounds
+                Vector3 NewLocation = ray.GetPoint(Distance);
+                Vector3 ClampedLocation = new Vector3(Mathf.Clamp(NewLocation.x, ScreenSpaceRect.xMin + 1.0f, ScreenSpaceRect.xMax - 1.0f), 
+                    Mathf.Clamp(NewLocation.y, ScreenSpaceRect.yMin + 1.0f, ScreenSpaceRect.yMax - 1.0f), NewLocation.z);
+                transform.position = ClampedLocation;
             }
         }
     }
 
-    IEnumerator InputDetection()
+    void OnStateChanged(GameState NewState)
     {
-        // @TODO Looking into this while loop, may not be necessary
-        // Also not entirely sure if this coroutine is necessary as it's just running off tick, the same as update
-        while (CurrentGameState == GameState.Running)
+        CurrentGameState = NewState;
+
+        switch (NewState)
         {
-            if (Input.touchCount > 0)
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            case GameState.Running:
+                // Resets the player score
+                // @TODO look to move this into it's own component
+                Score = 0;
+                OnScoreChanged.Invoke(Score);
 
-                // A raycast that returns the distance at which the ray intersected with the movement plane
-                if (MovementPlane.Raycast(ray, out float Distance))
+                Turret[] Turrets = GetComponentsInChildren<Turret>();
+                foreach (Turret T in Turrets)
                 {
-                     Vector3 NewLocation = ray.GetPoint(Distance);
-                    Vector3 ClampedLocation = new Vector3(Mathf.Clamp(NewLocation.x, ScreenSpaceRect.xMin + 1.0f, ScreenSpaceRect.xMax - 1.0f), 
-                        Mathf.Clamp(NewLocation.y, ScreenSpaceRect.yMin + 1.0f, ScreenSpaceRect.yMax - 1.0f), NewLocation.z);
-                    transform.position = ClampedLocation;
+                    T.WakeTurret();
                 }
-            }
 
-            yield return new WaitForEndOfFrame();
+                Health MyHealth = GetComponent<Health>();
+                if (!MyHealth)
+                {
+                    Debug.LogError("Add health component to Enemy prefab!");
+                }
+                else
+                {
+                    MyHealth.InitializeHealth();
+                }
+
+                break;
         }
     }
 
