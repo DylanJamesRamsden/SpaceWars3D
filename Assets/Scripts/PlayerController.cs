@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     // The plane at which our movement ray collides with
     Plane MovementPlane = new Plane(Vector3.forward, 0);
+    Rect ScreenSpaceRect;
 
     GameState CurrentGameState = GameState.Ready;
 
@@ -35,6 +36,10 @@ public class PlayerController : MonoBehaviour
         MyHealth.OnHealthDepleted += OnHealthDepleted;
 
         GameManager.OnStateChanged += OnStateChanged;
+
+        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
+        Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
+        ScreenSpaceRect = new Rect(bottomLeft.x, bottomLeft.y, topRight.x * 2f, topRight.y * 2f);
     }
 
     void OnHealthDepleted()
@@ -81,25 +86,17 @@ public class PlayerController : MonoBehaviour
         // Also not entirely sure if this coroutine is necessary as it's just running off tick, the same as update
         while (CurrentGameState == GameState.Running)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.touchCount > 0)
             {
-                // if (Input.touchCount > 0)
-                // {
-                //     Touch FirstTouch = Input.GetTouch(0);
-                //     Vector3 ScreenToWorldPosition = Camera.main.ScreenToWorldPoint(FirstTouch.position);
-                //     transform.position = new Vector3(ScreenToWorldPosition.x, transform.position.y, ScreenToWorldPosition.z);
-                //     Debug.Log("Touch");
-                // }
-
-                // Casts a ray from the camera in the direction of the frustrum
-                Vector2 ScreenPosition = Input.mousePosition;
-                Ray ray = Camera.main.ScreenPointToRay(ScreenPosition);
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 
                 // A raycast that returns the distance at which the ray intersected with the movement plane
                 if (MovementPlane.Raycast(ray, out float Distance))
                 {
-                    Vector3 NewLocation = ray.GetPoint(Distance);
-                    transform.position = NewLocation;
+                     Vector3 NewLocation = ray.GetPoint(Distance);
+                    Vector3 ClampedLocation = new Vector3(Mathf.Clamp(NewLocation.x, ScreenSpaceRect.xMin + 1.0f, ScreenSpaceRect.xMax - 1.0f), 
+                        Mathf.Clamp(NewLocation.y, ScreenSpaceRect.yMin + 1.0f, ScreenSpaceRect.yMax - 1.0f), NewLocation.z);
+                    transform.position = ClampedLocation;
                 }
             }
 
