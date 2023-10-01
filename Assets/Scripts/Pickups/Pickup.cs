@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-        Rigidbody MyRigidBody;
+    Rigidbody MyRigidBody;
 
     Vector3 OriginLocation;
 
