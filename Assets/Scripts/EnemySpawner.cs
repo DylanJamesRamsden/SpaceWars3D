@@ -6,8 +6,12 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
 
+    // The time between wave spawns
     public float IntervalBetweenWaveSpawn;
-    public float WaveSize;
+    // The size of waves. Increments with each Level
+    public int WaveSize;
+    // The max wave size, overwrites any incrementation based on Level
+    public int MaxWaveSize = 3;
 
     [Header("Spawn Zones:")]
     public BoxCollider TopSpawnZone;
@@ -40,9 +44,12 @@ public class EnemySpawner : MonoBehaviour
     void OnLevelChanged(int NewLevel)
     {
         IntervalBetweenWaveSpawn -= 0.2f;
-        WaveSize = NewLevel;
+        WaveSize = Mathf.Clamp(NewLevel, 1 , MaxWaveSize);
     }
 
+    /// <summary>
+    /// A coroutinne that spawns a wave every interval based on the IntervalBetweenWaveSpawn.
+    /// </summary>
     IEnumerator SpawnWave()
     {
         yield return new WaitForSeconds(IntervalBetweenWaveSpawn);
@@ -55,6 +62,9 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnWave());
     }
 
+    /// <summary>
+    /// Grabs an enemy from the EnemyPool and wakes it.
+    /// </summary>
     void SpawnEnemy()
     {
         GameObject MyEnemyGameobject = PoolingManager.Instance.GetPooledEnemy();
@@ -90,6 +100,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Finds a random spawn location in the spawn zones.
+    /// </summary>
     Vector3 GetRandomLocationInSpawnZone(BoxCollider SpawnZone)
     {
         // @TODO this isn't working based on rotation, look into

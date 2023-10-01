@@ -44,7 +44,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Changes the current game state to a new state 
+    /// <summary>
+    /// Changes the current game state to a new state.
+    /// </summary>
     void ChangeState(GameState NewState)
     {
         if (NewState == CurrentGameState)
@@ -69,7 +71,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("New game state: " + NewState.ToString());
     }
 
-    // Increments the level
+    /// <summary>
+    /// Increments the level.
+    /// </summary>
     void NextLevel()
     {
         if (CurrentGameState != GameState.Running)
@@ -88,7 +92,9 @@ public class GameManager : MonoBehaviour
         PlayerController.OnPlayerDeath -= OnPlayerDeath;
     }
 
-    // Starts the game
+    /// <summary>
+    /// Starts the game by setting the GameState to Running.
+    /// </summary>
     public void StartGame()
     {
         PlayerController.OnPlayerDeath += OnPlayerDeath;
@@ -96,13 +102,17 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.Running);
     }
 
-    // Readys the game
+    /// <summary>
+    /// Readys the game by setting the GameState to Ready.
+    /// </summary>
     public void ReadyGame()
     {
         ChangeState(GameState.Ready);
     }
 
-    // Pauses the game
+    /// <summary>
+    /// Pauses the game by setting the TimeScale to 0 and GameState to Paused.
+    /// </summary>
     public void PauseGame()
     {
         ChangeState(GameState.Paused);
@@ -110,7 +120,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
     }
 
-    // Unpauses the game
+    /// <summary>
+    /// Unpauses the game by setting the TimeScale to 1 and the GameState to Running.
+    /// </summary>
     public void UnpauseGame()
     {
         Time.timeScale = 1.0f;
