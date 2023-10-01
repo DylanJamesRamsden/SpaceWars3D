@@ -5,7 +5,7 @@ public class Loot : MonoBehaviour
 
     [Header("Score Pickups:")]
     // The Max number of Score Pickups that can be dropped
-    public int MaxScorePickupsToDrop = 1;
+    public int MaxScorePickupsToDrop = 3;
 
     [Header("Powerups:")]
     // The Max number of Score Pickups that can be dropped

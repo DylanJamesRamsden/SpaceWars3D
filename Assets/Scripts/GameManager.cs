@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance = null;
 
     // Delegates
-    static GameState CurrentGameState = GameState.Ready;
+    public static GameState CurrentGameState = GameState.Ready;
     public delegate void StateChanged(GameState NewState);
     public static event StateChanged OnStateChanged;
 

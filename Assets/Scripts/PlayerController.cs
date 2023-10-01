@@ -12,9 +12,8 @@ public class PlayerController : MonoBehaviour
 
     // The plane at which our movement ray collides with
     Plane MovementPlane = new Plane(Vector3.forward, 0);
+    // The rectangle representing our screen in World Space
     Rect ScreenSpaceRect;
-
-    GameState CurrentGameState = GameState.Ready;
 
     // Delegates
     public delegate void PlayerDeath();
@@ -57,7 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         // NB! Not using the new input system as it takes longer to set-up and for the input we require (a touch) it's just easier to implement it
         // through the old input system
-        if (Input.touchCount > 0 && CurrentGameState == GameState.Running)
+        if (Input.touchCount > 0 && GameManager.CurrentGameState == GameState.Running)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 
@@ -75,7 +74,6 @@ public class PlayerController : MonoBehaviour
 
     void OnStateChanged(GameState NewState)
     {
-        CurrentGameState = NewState;
 
         switch (NewState)
         {
@@ -105,6 +103,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds a given score to the Player.
+    /// </summary>
     public static void AddScore(int ScoreToAdd)
     {
         Score += ScoreToAdd;
@@ -112,6 +113,9 @@ public class PlayerController : MonoBehaviour
         OnScoreChanged.Invoke(Score);
     }
 
+    /// <summary>
+    /// Activates the Player's Shield power-up.
+    /// </summary>
     public void ActivateShield()
     {
         if (!MyShield)
@@ -128,6 +132,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds a given amount of health to the Player's Health component.
+    /// </summary>
     public void AddHealth(int AmountToAdd)
     {
         if (!MyHealth)
@@ -136,6 +143,9 @@ public class PlayerController : MonoBehaviour
         MyHealth.AddHealth(AmountToAdd);
     }
 
+    /// <summary>
+    /// Activates the FireNoost power-up on the Player's turrets.
+    /// </summary>
     public void ActivateFireBoost(float NewFireRate, float Duration)
     {
         Turret[] Turrets = GetComponentsInChildren<Turret>();
