@@ -30,6 +30,7 @@ public class Pickup : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
+        MyRigidBody.velocity = Vector3.zero;
         PoolingManager.Instance.AddPooledScorePickup(this.gameObject);
     }
 }
