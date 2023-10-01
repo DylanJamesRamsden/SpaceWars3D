@@ -2,21 +2,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public enum SpawnZone
-{
-    Top,
-    Side,
-    All
-}
-
 public class EnemyController : MonoBehaviour
 {
     public float ForwardMovementSpeed = .1f;
 
     Vector3 OriginLocation;
-
-    [Header("Spawning:")]
-    public SpawnZone AvailableSpawnZone;
 
     // Start is called before the first frame update
     void Start()

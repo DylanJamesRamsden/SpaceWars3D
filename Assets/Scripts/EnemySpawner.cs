@@ -14,8 +14,7 @@ public class EnemySpawner : MonoBehaviour
     public int MaxWaveSize = 3;
 
     [Header("Spawn Zones:")]
-    public BoxCollider TopSpawnZone;
-    public BoxCollider[] SideSpawnZones;
+    public BoxCollider SpawnZone;
 
     GameState CurrentGameState = GameState.Ready;
 
@@ -80,21 +79,9 @@ public class EnemySpawner : MonoBehaviour
         }
         else 
         {
-            Vector3 SpawnLocation = Vector3.zero;
-            Vector3 LookAtLocation = Vector3.zero;
-            switch (MyEnemy.AvailableSpawnZone)
-            {
-                case SpawnZone.Top:
-                    SpawnLocation = GetRandomLocationInSpawnZone(TopSpawnZone);
-                    LookAtLocation = new Vector3(SpawnLocation.x, TopSpawnZone.transform.forward.y * 10, SpawnLocation.z);
-                    Debug.DrawLine(SpawnLocation, LookAtLocation, Color.red, 10.0f);
-                    break;
-                case SpawnZone.Side:
-                    BoxCollider SideSpawnZone = SideSpawnZones[Random.Range(0, 1)];
-                    SpawnLocation = GetRandomLocationInSpawnZone(SideSpawnZone);
-                    //SpawnRotation = SideSpawnZone.gameObject.transform.localRotation;
-                    break;
-            }
+            Vector3 SpawnLocation = GetRandomLocationInSpawnZone(SpawnZone);
+            Vector3 LookAtLocation = new Vector3(SpawnLocation.x, SpawnZone.transform.forward.y * 10, SpawnLocation.z);
+            Debug.DrawLine(SpawnLocation, LookAtLocation, Color.red, 10.0f);
 
             MyEnemy.WakeEnemy(SpawnLocation, LookAtLocation);
         }
